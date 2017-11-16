@@ -5,7 +5,7 @@ include_once "core/Loader.php";
 
 include_once ("define.php");
 include_once ("function.php");
-include_once (__DIR__.'/../config/redisConfig.php');
+include_once (__DIR__.'/./config/redisConfig.php');
 
 
 class Run{

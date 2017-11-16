@@ -7,5 +7,11 @@
  */
 
 return [
+    'dbHost'=>'106.75.176.185',
 
+    'dbUser'=>'airlink',
+
+    'dbPwd'=>'airlink_new',
+
+    'dbName'=>'airlinktest8577',
 ];
