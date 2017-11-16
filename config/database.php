@@ -7,11 +7,5 @@
  */
 
 return [
-    'dbHost'=>'127.0.0.1',
 
-    'dbUser'=>'root',
-
-    'dbPwd'=>'wdlinux.cn',
-
-    'dbName'=>'test',
 ];

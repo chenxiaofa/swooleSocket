@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: root
- * Date: 17-10-9
- * Time: 下午1:57
+ * Date: 17-11-15
+ * Time: 下午3:55
  */
 
 namespace Model;
@@ -11,9 +11,9 @@ namespace Model;
 
 use core\Model;
 
-class testModel extends Model
+class userOnlineModel extends Model
 {
     protected   $table = "test";
 
-    protected   $fillable = [];
+
 }

@@ -5,7 +5,7 @@ include_once "core/Loader.php";
 
 include_once ("define.php");
 include_once ("function.php");
-
+include_once (__DIR__.'/../config/redisConfig.php');
 
 
 class Run{
@@ -34,17 +34,15 @@ class Run{
             die("action <$action> is undefined! \n");
         }
         if(!isset($this->dispatch[$controller])){
-            echo "set Controller => $controller \n";
             $this->dispatch[$controller] = new $controller();
         }
-        echo "dispatch \n";
+
         $this->dispatch[$controller]->$action($params);
 
     }
 
 
     public function loadClass($class){
-        echo "class:",$class,"\n";
         $filename = end(explode("\\",trim($class,"\\")));
         $controllers = APP_PATH."Controller/".$filename.".php";
         if(file_exists($controllers)){

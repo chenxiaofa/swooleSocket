@@ -11,4 +11,5 @@ return [
     'defaultAction' =>"indexAction",
     'controllerExtra'=>"Controller",
     'actionExtra'=>"Action",
+    'hostname' => 'http://airlink.timelink.cn',
 ];
