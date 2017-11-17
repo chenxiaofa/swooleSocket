@@ -48,6 +48,7 @@ class UserRedis
             $redis->hSet(AirLinkOnlineUuid,$uuid,$fd);
         }else{
             $newDevice = self::getUserFromDb($device['device_tag']);
+            echo "new Device:";var_dump($newDevice);echo "\n";
             $redis->hSet(AirLinkOnlineUuid,$newDevice['uuid'],$fd);//设置uuid
             if(count($newDevice)){
                 $newDevice['device_tag'] = $device['device_tag'];
