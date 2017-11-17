@@ -11,7 +11,7 @@ return [
 
     'dbUser'=>'airlink',
 
-    'dbPwd'=>'airlink_new',
+    'dbPwd'=>'airlinktest8577',
 
-    'dbName'=>'airlinktest8577',
+    'dbName'=>'airlink_new',
 ];
