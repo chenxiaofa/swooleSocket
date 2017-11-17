@@ -41,3 +41,4 @@ Stack trace:
 #2 /www/web/Swoole/core/DB.php(32): core\DB->__construct(Array)
 #3 /www/web/Swoole/core/Model.php(26): core\DB::getIns
 [2017-11-17 10:04:09 $5505.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+has disConnected fd = 1,

@@ -18,6 +18,6 @@ class baseController
     public function __construct()
     {
         $redis = Redis::getInstance();
-        $redis->redis();
+        $this->redis =  $redis->redis();
     }
 }
