@@ -23,12 +23,12 @@ class userController extends baseController
     }
 
     public function disconnectAction($params){
-        // 保存用户登录信息
-        $this->storeOnlineRecordByFd($params['fd']);
+
         //删除微信用户绑定的fd
         $this->delWechatDeviceBind($params['fd']);
 
-        Redis::getInstance()->redis()->hDel(AirLinkOnlineRecord,$params['fd']);
+        // 保存用户登录信息, 并删除用户登录信息
+        $this->storeOnlineRecordByFd($params['fd']);
     }
 
 
@@ -37,6 +37,10 @@ class userController extends baseController
         if($user){
             $user = json_decode($user,true);
             userOnlineModel::add(['start_time'=>$user['start_time'],'end_time'=>time(),'user_id'=>$user['user_id'],'ip_addr'=>$user['ip']]);
+            //删除存储的用户信息
+            Redis::getInstance()->redis()->hDel(AirLinkOnlineRecord,$fd);
+            Redis::getInstance()->redis()->hDel(AirLinkOnlineDevice,$user['device_tag']);
+            Redis::getInstance()->redis()->hDel(AirLinkOnlineUuid,$user['uuid']);
         }
     }
 
@@ -44,7 +48,7 @@ class userController extends baseController
         if($this->redis->hExists(AirLinkDeviceWechat,$fd)){
             $openids = $this->redis->hget(AirLinkDeviceWechat,$fd);
             $openids = json_decode($openids,true);
-            $this->redis->hdel(AirLinkDeviceWechat,$fd);
+            //$this->redis->hdel(AirLinkDeviceWechat,$fd);
             $device = UserRedis::getDeviceByFd($fd);
             $this->redis->hDel(AirLinkDeviceTagWechat,$device['device_tag']);
             $this->disBindWechat($openids);//需要做通知威信用户，所以不能直接删除
