@@ -36,8 +36,9 @@ class UserRedis
     public static function updateOrCreateUserByDeviceAndFd(array $device,$fd){
         $redis = Redis::getInstance()->redis();
         //将device的旧fd替换掉，没有旧的就直接设置成新的
-        $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
         $oldFd = $redis->hGet(AirLinkOnlineDevice,$device['device_tag']);
+        $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
+        echo "old fd :";var_dump($oldFd);echo "\n";
         if($oldFd){//将旧的fd替换成新的fd
             $oldDevice = $redis->hGet(AirLinkOnlineRecord,$oldFd);
             $redis->hDel(AirLinkOnlineRecord,$oldFd);
@@ -96,9 +97,10 @@ class UserRedis
 
 
     public static function getUserFromDb($device){
+        echo "FromDb:".$device,"\n";
         $userModel = new UserModel();
         $sql = "select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '{$device}' and `user`.app_id=1 limit 1 ";
-        return $userModel->executeQuery($sql);
+        return $userModel->execute($sql);
     }
 
 

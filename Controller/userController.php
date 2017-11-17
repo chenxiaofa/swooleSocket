@@ -17,9 +17,10 @@ use Model\userOnlineModel;
 class userController extends baseController
 {
     public function onlineAction($params){
-       UserRedis::updateOrCreateUserByDeviceAndFd(['device_tag'=>$params['device_tag'],'ip'=>$params['ip']],$params['fd']);
+       UserRedis::updateOrCreateUserByDeviceAndFd(['device_tag'=>$params['device_tag'],'ip'=>@$params['ip']],$params['fd']);
         UserRedis::updateWechatDevice($params['device_tag']);
         UserRedis::personNum();
+        echo "onlineAction has complete \n";
     }
 
     public function disconnectAction($params){

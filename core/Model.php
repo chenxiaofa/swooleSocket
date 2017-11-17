@@ -61,6 +61,11 @@ class Model
     }
 
 
+    public function modelExecute($sql){
+        return $this->executeQuery($sql);
+    }
+
+
     /**
      * @param array $params
      * curd
