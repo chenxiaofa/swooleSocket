@@ -37,24 +37,29 @@ class UserRedis
         $redis = Redis::getInstance()->redis();
         //将device的旧fd替换掉，没有旧的就直接设置成新的
         $oldFd = $redis->hGet(AirLinkOnlineDevice,$device['device_tag']);
-        $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
         echo "old fd :";var_dump($oldFd);echo "\n";
         if($oldFd){//将旧的fd替换成新的fd
             $oldDevice = $redis->hGet(AirLinkOnlineRecord,$oldFd);
             $redis->hDel(AirLinkOnlineRecord,$oldFd);
-            $redis->hSet(AirLinkOnlineRecord,$fd,$oldDevice);
-            //设置uuid的fd
-            $uuid = json_decode($oldDevice,true)['uuid'];
-            $redis->hSet(AirLinkOnlineUuid,$uuid,$fd);
+            if($oldDevice){
+                $redis->hSet(AirLinkOnlineRecord,$fd,$oldDevice);
+                //设置uuid的fd
+                $uuid = json_decode($oldDevice,true)['uuid'];
+                $redis->hSet(AirLinkOnlineUuid,$uuid,$fd);
+                //设置device_tag的fd
+                $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
+            }
         }else{
             $newDevice = self::getUserFromDb($device['device_tag']);
-            echo "new Device:";var_dump($newDevice);echo "\n";
-            $redis->hSet(AirLinkOnlineUuid,$newDevice['uuid'],$fd);//设置uuid
-            if(count($newDevice)){
+            if($newDevice){
+                $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
+                $redis->hSet(AirLinkOnlineUuid,$newDevice['uuid'],$fd);//设置uuid
                 $newDevice['device_tag'] = $device['device_tag'];
                 $newDevice['start_time'] = time();
                 $newDevice['ip'] = $device['ip'];
                 $redis->hSet(AirLinkOnlineRecord,$fd,json_encode($newDevice));
+                //统计人数峰值
+                self::personNum();
             }
         }
 
@@ -98,10 +103,9 @@ class UserRedis
 
 
     public static function getUserFromDb($device){
-        echo "FromDb:".$device,"\n";
         $userModel = new UserModel();
         $sql = "select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '{$device}' and `users`.app_id=1 limit 1 ";
-        return $userModel->execute($sql);
+        return current($userModel->execute($sql));
     }
 
 
