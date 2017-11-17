@@ -125,3 +125,4 @@ Stack trace:
 #2 /www/web/Swoole/core/DB.php(32): core\DB->__construct(Array)
 #3 /www/web/Swoole/core/Model.php(26): core\DB::getInstanc
 [2017-11-16 18:06:31 $4350.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+[2017-11-16 18:26:53 #4349.2]	NOTICE	Server is shutdown now.
