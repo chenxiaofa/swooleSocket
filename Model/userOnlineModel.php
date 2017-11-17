@@ -13,7 +13,7 @@ use core\Model;
 
 class userOnlineModel extends Model
 {
-    protected   $table = "test";
+    protected   $table = "user_onlines";
 
 
 }
