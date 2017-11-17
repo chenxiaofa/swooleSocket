@@ -16,7 +16,7 @@ class Server
         'heartbeat_idle_time' => 60 * 60,
         'daemonize' => true,
         'worker_num' => 2,
-        'log_file' => '/www/web/Swoole/ceshi.log'
+        'log_file' => __DIR__.'/ceshi.log'
     ];
 
 
@@ -48,6 +48,7 @@ class Server
     public function OnReceive($serv,$fd,$from_id,$data){
         echo "has Received form $fd=> $data","\n";
         $data = json_decode($data,true);
+        $data['params']['fd'] = $fd;
         $this->copyGlobal($serv,$fd,$from_id);
         if(isset($data['path'])&&$data['params']){
             $serv->index->run($data['path'],$data['params']);
