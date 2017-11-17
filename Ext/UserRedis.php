@@ -99,7 +99,7 @@ class UserRedis
     public static function getUserFromDb($device){
         echo "FromDb:".$device,"\n";
         $userModel = new UserModel();
-        $sql = "select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '{$device}' and `user`.app_id=1 limit 1 ";
+        $sql = "select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '{$device}' and `users`.app_id=1 limit 1 ";
         return $userModel->execute($sql);
     }
 
