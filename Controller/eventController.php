@@ -21,7 +21,7 @@ class eventController extends baseController
      * @param $params
      * 基础事件
      */
-    public function index($params){
+    public function indexAction($params){
         $event_id = $this->getEventByName($params['event_name']);
         $device = UserRedis::getDeviceByFd($params['fd']);
         if($device&&$event_id){//如果存在设备
@@ -30,7 +30,7 @@ class eventController extends baseController
                 'event_id'=>$event_id,
                 'app_version'=>$device['app_version'],
                 'app_edition'=>$device['app_edition'],
-                'event_value'=>$params['event_value'],
+                'event_value'=>@$params['event_value'],
                 'created_at' =>time(),
                 'updated_at' =>time()
             ]);
@@ -47,10 +47,10 @@ class eventController extends baseController
         $otherFd = UserRedis::getFdByUuid($params['uuid']);
         $otherDevice = UserRedis::getDeviceByFd($otherFd);
         if($params['interact_status']== 'start'){//开始投影
-            if($device && $otherDevice){
+            if($device && $otherDevice && $otherFd){
                 $record = [
                     'user_id'=>$device['user_id'],
-                    'inter_user_id'=>$otherDevice['user_id'],
+                    'interact_user_id'=>$otherDevice['user_id'],
                     'is_host'=>$params['is_host'],
                     'start_time'=>time()
                 ];
@@ -70,7 +70,7 @@ class eventController extends baseController
 
 
 
-
+    //获取投影事件，
     private function getEventByName($name){
         if($this->redis->exists(AirLinkEvents)){
             return $this->redis->hGet(AirLinkEvents,'id'.$name);

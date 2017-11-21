@@ -14,6 +14,4 @@ use core\Model;
 class userOnlineModel extends Model
 {
     protected   $table = "user_onlines";
-
-
 }

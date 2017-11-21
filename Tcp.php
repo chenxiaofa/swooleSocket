@@ -6,6 +6,8 @@
  * Date: 17-8-20
  * Time: 下午2:43
  */
+include "run.php";
+
 class Server
 {
 
@@ -43,6 +45,7 @@ class Server
     public function OnClose($serv, $fd)
     {
         echo "has disConnected fd = $fd,\n";
+        $serv->index->run('user/disconnect',[]);
     }
 
     public function OnReceive($serv,$fd,$from_id,$data){
@@ -68,8 +71,9 @@ class Server
     }
 
     public function onWorkerStart($serv,$work_id){
-        include "run.php";
+        //这里只运行一次,在work启动，task启动的时候加载文件，并且调用;如果出现exit和异常导致程序推出，这里也会出现代码重载
         $serv->index = new  \swoole\Run();
+
     }
 
     public function copyGlobal($serv,$fd,$from_id){

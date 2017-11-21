@@ -11,6 +11,7 @@ namespace Controller;
 
 use core\Redis;
 use Ext\UserRedis;
+use Model\InteractUser;
 use Model\UserModel;
 use Model\userOnlineModel;
 
@@ -20,13 +21,15 @@ class userController extends baseController
        UserRedis::updateOrCreateUserByDeviceAndFd(['device_tag'=>$params['device_tag'],'ip'=>@$params['ip']],$params['fd']);
         UserRedis::updateWechatDevice($params['device_tag']);
         echo "onlineAction has complete \n";
+        echo "PHP MEMORY USAGE:".memory_get_usage();
     }
 
     public function disconnectAction($params){
 
         //删除微信用户绑定的fd
         $this->delWechatDeviceBind($params['fd']);
-
+        //投影事件删除
+        $this->disInteract($params['fd']);
         // 保存用户登录信息, 并删除用户登录信息
         $this->storeOnlineRecordByFd($params['fd']);
     }
@@ -67,6 +70,16 @@ class userController extends baseController
             curl_setopt($ch,CURLOPT_POSTFIELDS,$postData);
             $output = curl_exec($ch);
             curl_close($ch);
+    }
+
+
+    public function disInteract($fd){
+        $interact = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord,$fd),true);
+        if($interact){
+            Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$fd);
+            $interact['end_time'] = time();
+            InteractUser::add($interact);
+        }
     }
 
 

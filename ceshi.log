@@ -1,44 +1,9 @@
 
-has connected fd=>1,
-has Received form 1=> {"path":"user\/online","params":{"device_tag":"112"}}
-onlineAction has complete 
-Receive 执行结束 
-has Received form 1=> {"path":"user\/online","params":{"device_tag":"112"}}
-onlineAction has complete 
-Receive 执行结束 
-has disConnected fd = 1,
-[2017-11-17 10:00:09 #5342.2]	NOTICE	Server is shutdown now.
+MEMORY USEAGE:286360MEMORY USEAGE:286360[2017-11-21 11:35:15 #17366.2]	NOTICE	Server is shutdown now.
 has connected fd=>1,
 has Received form 1=> {"path":"user\/online","params":{"device_tag":"112"}}
 old fd :string(1) "1"
 
 onlineAction has complete 
-Receive 执行结束 
-has disConnected fd = 1,
-[2017-11-17 10:03:33 #5434.2]	NOTICE	Server is shutdown now.
-has connected fd=>1,
-has Received form 1=> {"path":"user\/online","params":{"device_tag":"112"}}
-old fd :bool(false)
-
-FromDb:112
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'airlink'@'113.88.13.229' (using password: YES)' in /www/web/Swoole/core/DB.php:45
-Stack trace:
-#0 /www/web/Swoole/core/DB.php(45): PDO->__construct('mysql:host=106....', 'airlink', 'airlink_new')
-#1 /www/web/Swoole/core/DB.php(26): core\DB->connect()
-#2 /www/web/Swoole/core/DB.php(32): core\DB->__construct(Array)
-#3 /www/web/Swoole/core/Model.php(26): core\DB::getInstance(Array)
-#4 /www/web/Swoole/Ext/UserRedis.php(101): core\Model->__construct()
-#5 /www/web/Swoole/Ext/UserRedis.php(50): Ext\UserRedis::getUserFromDb('112')
-#6 /www/web/Swoole/Controller/userController.php(20): Ext\UserRedis::updateOrCreateUserByDeviceAndFd(Array, 1)
-#7 /www/web/Swoole/run.php(40): Controller\userController->onlineAction(Array)
-#8 /www/web/Swoole/run.php(58): swoole\Run->dispatch('user/online', Array)
-#9 /www/web/Swoole/Tcp.php(54): swoole\Run->run('user/online', Array)
-#10 [internal function]: Server->OnReceive(Object(swoole_server), in /www/web/Swoole/core/DB.php on line 45
-[2017-11-17 10:04:09 *5509.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'airlink'@'113.88.13.229' (using password: YES)' in /www/web/Swoole/core/DB.php:45
-Stack trace:
-#0 /www/web/Swoole/core/DB.php(45): PDO->__construct('mysql:host=106....', 'airlink', 'airlink_new')
-#1 /www/web/Swoole/core/DB.php(26): core\DB->connect()
-#2 /www/web/Swoole/core/DB.php(32): core\DB->__construct(Array)
-#3 /www/web/Swoole/core/Model.php(26): core\DB::getIns
-[2017-11-17 10:04:09 $5505.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+PHP MEMORY USAGE:360104Receive 执行结束 
 has disConnected fd = 1,

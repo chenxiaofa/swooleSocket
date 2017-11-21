@@ -9,7 +9,9 @@
 namespace Model;
 
 
-class InteractUser
+use core\Model;
+
+class InteractUser extends Model
 {
     protected $table = 'interact_users';
 }
