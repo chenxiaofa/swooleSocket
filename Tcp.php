@@ -113,6 +113,8 @@ class Server
 
 
     public function transRoute($data){
+        var_dump($GLOBALS);
+        echo "\n";
         $result = array();
         if(isset($data['data_type'])){
             switch ($data['data_type']){
