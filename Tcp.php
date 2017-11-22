@@ -14,10 +14,13 @@ class Server
     private $server;
 
     private $config = [
-        'heartbeat_check_interval' => 20,
-        'heartbeat_idle_time' => 60 * 60,
+        'open_tcp_keepalive'=>1,
+        'tcp_keepidle'=>30,
+        'tcp_keepcount'=>2,
+        'tcp_keepinterval'=>10,
         'daemonize' => true,
-        'worker_num' => 2,
+        'worker_num'=>2,
+        'task_worker_num'=>2,
         'log_file' => __DIR__.'/ceshi.log'
     ];
 
