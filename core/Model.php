@@ -49,7 +49,6 @@ class Model
         echo $sql,"\n";
         $result = $this->_instance->db()->prepare($sql);
         $result->execute($this->modelParams);
-        var_dump($this->modelParams);
         if(end($result->errorInfo())=="MySQL server has gone away"){//断线重连
             $this->_instance->connect();
             $result = $this->_instance->db()->prepare($sql);

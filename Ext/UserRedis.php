@@ -41,23 +41,41 @@ class UserRedis
         if($oldFd){//将旧的fd替换成新的fd
             $oldDevice = $redis->hGet(AirLinkOnlineRecord,$oldFd);
             $redis->hDel(AirLinkOnlineRecord,$oldFd);
+
             if($oldDevice){
+                //校验设备重连时间是否过期，
+                $tmpDevice = json_decode($oldDevice,true);
+                if(time()-$tmpDevice['start_time']>60*5){//大于5分钟的断线会被舍弃，之前设置了心跳设置的，会进行断线，正常情况不会出现这种情况
+                    $oldDevice = self::getUserFromDb($device['device_tag']);
+                    if($oldDevice){
+                        $newDevice['device_tag'] = $device['device_tag'];
+                        $newDevice['start_time'] = time();
+                        $newDevice['ip'] = $device['ip'];
+                        $oldDevice = json_encode($oldDevice);
+                    }else{
+                        return false;
+                    }
+                }
+                $redis->multi();
                 $redis->hSet(AirLinkOnlineRecord,$fd,$oldDevice);
                 //设置uuid的fd
                 $uuid = json_decode($oldDevice,true)['uuid'];
                 $redis->hSet(AirLinkOnlineUuid,$uuid,$fd);
                 //设置device_tag的fd
                 $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
+                $redis->exec();
             }
         }else{
             $newDevice = self::getUserFromDb($device['device_tag']);
             if($newDevice){
+                $redis->multi();
                 $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
                 $redis->hSet(AirLinkOnlineUuid,$newDevice['uuid'],$fd);//设置uuid
                 $newDevice['device_tag'] = $device['device_tag'];
                 $newDevice['start_time'] = time();
                 $newDevice['ip'] = $device['ip'];
                 $redis->hSet(AirLinkOnlineRecord,$fd,json_encode($newDevice));
+                $redis->exec();
                 //统计人数峰值
                 self::personNum();
             }

@@ -61,6 +61,7 @@ class eventController extends baseController
             if($interact){
                 Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$params['fd']);
                 $interact['end_time'] = time();
+                $interact['ip_addr'] = $GLOBALS['ip'];
                 InteractUser::add($interact);
             }
         }

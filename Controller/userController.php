@@ -10,6 +10,7 @@ namespace Controller;
 
 
 use core\Redis;
+use Ext\Server;
 use Ext\UserRedis;
 use Model\InteractUser;
 use Model\UserModel;
@@ -18,14 +19,11 @@ use Model\userOnlineModel;
 class userController extends baseController
 {
     public function onlineAction($params){
-       UserRedis::updateOrCreateUserByDeviceAndFd(['device_tag'=>$params['device_tag'],'ip'=>@$params['ip']],$params['fd']);
+        UserRedis::updateOrCreateUserByDeviceAndFd(['device_tag'=>$params['device_tag'],'ip'=>@$GLOBALS['ip']],$params['fd']);
         UserRedis::updateWechatDevice($params['device_tag']);
-        echo "onlineAction has complete \n";
-        echo "PHP MEMORY USAGE:".memory_get_usage();
     }
 
     public function disconnectAction($params){
-
         //删除微信用户绑定的fd
         $this->delWechatDeviceBind($params['fd']);
         //投影事件删除
@@ -35,16 +33,55 @@ class userController extends baseController
     }
 
 
-    public function storeOnlineRecordByFd($fd){
-        $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
-        if($user){
-            $user = json_decode($user,true);
-            userOnlineModel::add(['start_time'=>$user['start_time'],'end_time'=>time(),'user_id'=>$user['user_id'],'ip_addr'=>$user['ip']]);
-            //删除存储的用户信息
+    public function disWechatAction(){
+
+        $wechatDevice = Redis::getInstance()->redis()->hGetAll('airlink_wechat_device');
+        $deleteWechats = [];
+        foreach ($wechatDevice as $wechat=> $fd){
+            $fd = json_decode($fd,true);
+            if($fd['time']+30*60<time()){
+                $deleteWechats[] = $wechat;
+                if(Server::fdExists($fd['fd'])){
+                    Server::send(json_decode(['type'=>'disbind','openid'=>$wechat]),$fd['fd']);
+                }
+            }
+        }
+
+        echo "请求断开数量：",count($deleteWechats),"\n";
+
+        if(count($deleteWechats) >0){
+            $this->disBindWechat($deleteWechats);
+        }
+
+    }
+
+    public function disUserAction(){//删除没有链接的user
+        $connections = Server::getConnections();
+        $userFds = Redis::getInstance()->redis()->hKeys(AirLinkOnlineRecord);
+        $diff = array_diff($userFds,$connections);
+        foreach ($diff as $fd){
+            $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
             Redis::getInstance()->redis()->hDel(AirLinkOnlineRecord,$fd);
+            $user = json_decode($user,true);
             Redis::getInstance()->redis()->hDel(AirLinkOnlineDevice,$user['device_tag']);
             Redis::getInstance()->redis()->hDel(AirLinkOnlineUuid,$user['uuid']);
         }
+    }
+
+
+    public function storeOnlineRecordByFd($fd){
+        $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
+        if($user){
+            Redis::getInstance()->redis()->multi();
+            //存储用户信息
+            $user = json_decode($user,true);
+            userOnlineModel::add(['start_time'=>$user['start_time'],'end_time'=>time(),'user_id'=>$user['user_id'],'ip_addr'=>$user['ip']]);
+            //删除临时存储的用户信息
+            Redis::getInstance()->redis()->hDel(AirLinkOnlineRecord,$fd);
+            Redis::getInstance()->redis()->hDel(AirLinkOnlineDevice,$user['device_tag']);
+            Redis::getInstance()->redis()->hDel(AirLinkOnlineUuid,$user['uuid']);
+            Redis::getInstance()->redis()->exec();
+            }
     }
 
     public function delWechatDeviceBind($fd){
@@ -80,6 +117,7 @@ class userController extends baseController
             $interact['end_time'] = time();
             InteractUser::add($interact);
         }
+
     }
 
 
