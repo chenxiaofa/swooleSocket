@@ -52,12 +52,12 @@ class Server
     }
 
     public function OnReceive($serv,$fd,$from_id,$data){
-        $this->copyGlobal($serv,$fd,$from_id);
 
         $data = decode($data);
         foreach ($data as $val){
             $val = json_decode($val,true);
             if(is_array($val) && !empty($val)){
+                $val['tcp_fd'] = $fd;
                 $serv->task($val);
             }
         }
@@ -75,8 +75,11 @@ class Server
     }
 
     public function onTask($serv,$task_id,$from_id,$data){
-
-        $data = $this->transRoute($data);
+        echo "task 接受的data：\n";
+        var_dump($data);
+        echo "\n";
+        $this->copyGlobal($serv,$data['tcp_fd']);
+      //  $data = $this->transRoute($data);
         if(isset($data['path'])){
             $serv->index->run($data['path'],$data['params']);
         }
@@ -104,17 +107,14 @@ class Server
 
     }
 
-    public function copyGlobal($serv,$fd,$from_id){
+    public function copyGlobal($serv,$fd){
         $GLOBALS['serv'] = &$serv;
-        $GLOBALS['ip'] = $serv->connection_info($fd,$from_id)['remote_ip'];
+        $GLOBALS['ip'] = $serv->connection_info($fd)['remote_ip'];
         $GLOBALS['fd'] = $fd;
-        $GLOBALS['from_id'] = $from_id;
     }
 
 
     public function transRoute($data){
-        var_dump($GLOBALS);
-        echo "\n";
         $result = array();
         if(isset($data['data_type'])){
             switch ($data['data_type']){
