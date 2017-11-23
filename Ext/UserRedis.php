@@ -35,8 +35,22 @@ class UserRedis
      */
     public static function updateOrCreateUserByDeviceAndFd(array $device,$fd){
         $redis = Redis::getInstance()->redis();
+
+
+        //避免fd交叉感染，先判断是否存在fd已经保存了数据的
+        $invalidDevice = $redis->hget(AirLinkOnlineRecord,$fd);
+        if($invalidDevice){
+            $invalidDevice = json_decode($invalidDevice,true);
+            $redis->multi();
+            $redis->hDel(AirLinkOnlineRecord,$fd);
+            $redis->hDel(AirLinkOnlineDevice,$invalidDevice['device_tag']);
+            $redis->hDel(AirLinkOnlineUuid,$invalidDevice['uuid']);
+            $redis->exec();
+        }
+
         //将device的旧fd替换掉，没有旧的就直接设置成新的
         $oldFd = $redis->hGet(AirLinkOnlineDevice,$device['device_tag']);
+
         echo "old fd :";var_dump($oldFd);echo "\n";
         if($oldFd){//将旧的fd替换成新的fd
             $oldDevice = $redis->hGet(AirLinkOnlineRecord,$oldFd);
@@ -45,7 +59,7 @@ class UserRedis
             if($oldDevice){
                 //校验设备重连时间是否过期，
                 $tmpDevice = json_decode($oldDevice,true);
-                if(time()-$tmpDevice['start_time']>60*5){//大于5分钟的断线会被舍弃，之前设置了心跳设置的，会进行断线，正常情况不会出现这种情况
+                if($tmpDevice!=$device['device_tag']){//大于5分钟的断线会被舍弃，之前设置了心跳设置的，会进行断线，正常情况不会出现这种情况
                     $oldDevice = self::getUserFromDb($device['device_tag']);
                     if($oldDevice){
                         $oldDevice['device_tag'] = $device['device_tag'];
