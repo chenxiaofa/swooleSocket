@@ -48,9 +48,9 @@ class UserRedis
                 if(time()-$tmpDevice['start_time']>60*5){//大于5分钟的断线会被舍弃，之前设置了心跳设置的，会进行断线，正常情况不会出现这种情况
                     $oldDevice = self::getUserFromDb($device['device_tag']);
                     if($oldDevice){
-                        $newDevice['device_tag'] = $device['device_tag'];
-                        $newDevice['start_time'] = time();
-                        $newDevice['ip'] = $device['ip'];
+                        $oldDevice['device_tag'] = $device['device_tag'];
+                        $oldDevice['start_time'] = time();
+                        $oldDevice['ip'] = $device['ip'];
                         $oldDevice = json_encode($oldDevice);
                     }else{
                         return false;
