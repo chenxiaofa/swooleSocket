@@ -48,7 +48,7 @@ class Server
     public function OnClose($serv, $fd)
     {
         echo "has disConnected fd = $fd,\n";
-        $serv->index->run('user/disconnect',[]);
+        $serv->task(['data_type'=>'disconnect','tcp_fd'=>$fd]);
     }
 
     public function OnReceive($serv,$fd,$from_id,$data){

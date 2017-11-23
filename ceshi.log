@@ -578,3 +578,33 @@ PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
 PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
 [2017-11-23 09:45:19 *8488.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
 [2017-11-23 09:45:19 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+请求断开数量：0
+PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
+PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
+[2017-11-23 09:50:19 *9118.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
+[2017-11-23 09:50:19 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+请求断开数量：0
+PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
+PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
+[2017-11-23 09:55:22 *9181.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
+[2017-11-23 09:55:22 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+请求断开数量：0
+PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
+PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
+[2017-11-23 10:00:22 *9210.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
+[2017-11-23 10:00:22 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+请求断开数量：0
+PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
+PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
+[2017-11-23 10:05:23 *9228.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
+[2017-11-23 10:05:23 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+请求断开数量：0
+PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
+PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
+[2017-11-23 10:10:23 *9249.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
+[2017-11-23 10:10:23 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+请求断开数量：0
+PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
+PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
+[2017-11-23 10:15:25 *9270.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
+[2017-11-23 10:15:25 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
