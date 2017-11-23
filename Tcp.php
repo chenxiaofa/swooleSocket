@@ -79,11 +79,11 @@ class Server
         var_dump($data);
         echo "\n";
         $this->copyGlobal($serv,$data['tcp_fd']);
-      //  $data = $this->transRoute($data);
+        unset($data['tcp_fd']);
+        $data = $this->transRoute($data);
         if(isset($data['path'])){
             $serv->index->run($data['path'],$data['params']);
         }
-
         //调度任务，操作数据
 
     }
