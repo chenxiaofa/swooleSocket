@@ -44,7 +44,7 @@ class eventController extends baseController
      */
     public function interactAction($params){
         $device = UserRedis::getDeviceByFd($params['fd']);
-        $otherFd = UserRedis::getFdByUuid($params['uuid']);
+        $otherFd = UserRedis::getFdByUuid($params['link_device_tag']);
         $otherDevice = UserRedis::getDeviceByFd($otherFd);
         if($params['interact_status']== 'start'){//开始投影
             if($device && $otherDevice && $otherFd){
