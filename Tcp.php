@@ -96,7 +96,7 @@ class Server
         //这里只运行一次,在work启动，task启动的时候加载文件，并且调用;如果出现exit和异常导致程序推出，这里也会出现代码重载
         $serv->index = new  \swoole\Run();
 
-
+        $GLOBALS['serv'] = &$serv;
         //定时任务，删除僵尸用户数据，
         if($work_id == 0){
             $serv->tick(5*60000,function ($timer_id)use($serv){
@@ -108,7 +108,7 @@ class Server
     }
 
     public function copyGlobal($serv,$fd){
-        $GLOBALS['serv'] = &$serv;
+        //$GLOBALS['serv'] = &$serv;
         $GLOBALS['ip'] = $serv->connection_info($fd)['remote_ip'];
         $GLOBALS['fd'] = $fd;
     }
