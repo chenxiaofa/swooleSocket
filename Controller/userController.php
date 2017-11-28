@@ -84,15 +84,6 @@ class userController extends baseController
                 //删除投影记录
                 Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$fd);
             }
-        }else{
-            if(count($connections)===0){
-                //删除用户数据
-                Redis::getInstance()->redis()->del(AirLinkOnlineRecord);
-                Redis::getInstance()->redis()->del(AirLinkOnlineDevice);
-                Redis::getInstance()->redis()->del(AirLinkOnlineUuid);
-                //删除投影记录
-                Redis::getInstance()->redis()->del(AirLinkInteractRecord);
-            }
         }
         //还需要删除投影记录，
 
@@ -100,6 +91,7 @@ class userController extends baseController
 
 
     public function storeOnlineRecordByFd($fd){
+        echo "storeOnlineRecord\n";
         $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
         if($user){
             Redis::getInstance()->redis()->multi();

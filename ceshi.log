@@ -179,3 +179,74 @@ timer is ontime
 PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
 PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
 请求断开数量：1
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 51
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 53
+请求断开数量：2
+connection list is finishedconnection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finished
