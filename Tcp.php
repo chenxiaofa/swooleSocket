@@ -69,7 +69,7 @@ class Server
 
     public function onTask($serv,$task_id,$from_id,$data){
         $this->copyGlobal($serv,$data['tcp_fd']);
-        $data['params']['fd'] = $data['tcp_fd'];
+        //$data['params']['fd'] = $data['tcp_fd'];
         unset($data['tcp_fd']);
         $data = $this->transRoute($data);
         var_dump($data);
@@ -123,6 +123,10 @@ class Server
                     break;
                 case 'disconnect':
                     $result['path'] = 'user/disconnect';
+                    break;
+                case 'wechat':
+                    $result['path'] = 'user/wechat';
+                    $data['to_fd'] = $data['fd'];//这里需要区分一下，data['fd']是to_fd,下面会进行转换
                     break;
             }
             unset($data['data_type']);

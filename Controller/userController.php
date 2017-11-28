@@ -32,6 +32,15 @@ class userController extends baseController
         $this->storeOnlineRecordByFd($params['fd']);
     }
 
+    public function wechatAction($params){
+        echo "用户发送wechat：";
+        var_dump($params);
+        echo "\n";
+        if(Server::fdExists($params['to_fd'])){
+            Server::send(json_encode($params['content']),$params['to_fd']);
+        }
+    }
+
 
     public function disWechatAction(){
 

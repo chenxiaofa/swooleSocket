@@ -1,1 +1,57 @@
 
+timer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+请求断开数量：0
+connection list is finishedtimer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 13:54:08 *9669.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 13:54:08 $9653.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 13:54:29 *14363.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 13:54:29 $14350.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 13:59:09 *16784.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 13:59:09 $9653.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 13:59:30 *16787.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 13:59:30 $14350.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 14:04:09 *16842.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 14:04:09 $9653.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 14:04:30 *16849.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 14:04:30 $14350.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 14:09:09 *16905.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 14:09:09 $9653.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+timer is ontime 
+PHP Notice:  Undefined index: time in /www/web/Swoole/Controller/userController.php on line 42
+PHP Notice:  Undefined index: fd in /www/web/Swoole/Controller/userController.php on line 44
+PHP Fatal error:  Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37
+[2017-11-28 14:09:30 *16913.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to undefined method swoole_server::exists() in /www/web/Swoole/Ext/Server.php on line 37.
+[2017-11-28 14:09:30 $14350.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
