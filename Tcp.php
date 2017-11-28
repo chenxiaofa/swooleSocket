@@ -72,7 +72,7 @@ class Server
         $data['params']['fd'] = $data['tcp_fd'];
         unset($data['tcp_fd']);
         $data = $this->transRoute($data);
-
+        var_dump($data);
         if(isset($data['path'])){
             echo "run path:",$data['path'],"\n";
             $serv->index->run($data['path'],$data['params']);
