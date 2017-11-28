@@ -48,7 +48,7 @@ class userController extends baseController
         $deleteWechats = [];
         foreach ($wechatDevice as $wechat=> $fd){
             $fd = json_decode($fd,true);
-            if($fd['time']+30*60<time()){
+            if($fd['time']+2*60<time()){
                 $deleteWechats[] = $wechat;
                 if(Server::fdExists($fd['fd'])){
                     Server::send(json_encode(['type'=>'disbind','openid'=>$wechat]),$fd['fd']);
