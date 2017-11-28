@@ -129,6 +129,7 @@ class userController extends baseController
             curl_setopt($ch,CURLOPT_POSTFIELDS,$postData);
             $output = curl_exec($ch);
             curl_close($ch);
+            var_dump($output);
     }
 
 
