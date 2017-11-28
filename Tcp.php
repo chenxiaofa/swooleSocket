@@ -92,9 +92,11 @@ class Server
         $GLOBALS['serv'] = &$serv;
         //定时任务，删除僵尸用户数据，
         if($work_id == 0){
-            $serv->tick(5*60000,function ($timer_id)use($serv){
-                echo "timer is ontime \n";
+            $serv->tick(60000,function ($timer_id)use($serv){
                 $serv->index->run('user/disWechat',[]);
+                $serv->index->run('user/disUser',[]);
+            });
+            $serv->tick(120*6000,function ($timer_id)use($serv){
                 $serv->index->run('user/disUser',[]);
             });
         }

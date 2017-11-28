@@ -59,7 +59,7 @@ class UserRedis
             if($oldDevice){
                 //校验设备重连时间是否过期，
                 $tmpDevice = json_decode($oldDevice,true);
-                if($tmpDevice!=$device['device_tag']){//大于5分钟的断线会被舍弃，之前设置了心跳设置的，会进行断线，正常情况不会出现这种情况
+                if($tmpDevice['device_tag']!=$device['device_tag']){//大于5分钟的断线会被舍弃，之前设置了心跳设置的，会进行断线，正常情况不会出现这种情况
                     $oldDevice = self::getUserFromDb($device['device_tag']);
                     if($oldDevice){
                         $oldDevice['device_tag'] = $device['device_tag'];

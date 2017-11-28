@@ -51,7 +51,7 @@ class userController extends baseController
             if($fd['time']+30*60<time()){
                 $deleteWechats[] = $wechat;
                 if(Server::fdExists($fd['fd'])){
-                    Server::send(json_decode(['type'=>'disbind','openid'=>$wechat]),$fd['fd']);
+                    Server::send(json_encode(['type'=>'disbind','openid'=>$wechat]),$fd['fd']);
                 }
             }
         }
@@ -67,8 +67,13 @@ class userController extends baseController
     public function disUserAction(){//删除没有链接的user
         $connections = Server::getConnections();
         $userFds = Redis::getInstance()->redis()->hKeys(AirLinkOnlineRecord);
+        echo "dis user";
+        var_dump($connections);
+        var_dump($userFds);
+        echo "\n";
         if(count($connections)>0 && count($userFds)>0){
             $diff = array_diff($userFds,$connections);
+            echo "diff is :\n";var_dump($diff);
             foreach ($diff as $fd){
                 //删除用户数据
                 $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
