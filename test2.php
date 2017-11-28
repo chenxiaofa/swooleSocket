@@ -21,9 +21,9 @@ $array1 = ['data_type'=>'airlink_online','device_tag'=>$device_tag];
 
 $client->send(json_encode($array1));
 sleep(20);
-for($i=0;$i<1;$i++){
-    usleep(100000);
-    $client->send(json_encode($interact));
-}
+//for($i=0;$i<1;$i++){
+//    usleep(100000);
+//    $client->send(json_encode($interact));
+//}
 
-sleep(100);
+sleep(100000);
