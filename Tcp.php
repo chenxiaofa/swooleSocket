@@ -102,7 +102,7 @@ class Server
     }
 
     public function copyGlobal($serv,$fd){
-        //$GLOBALS['serv'] = &$serv;
+        $GLOBALS['serv'] = &$serv;
         $GLOBALS['ip'] = $serv->connection_info($fd)['remote_ip'];
         $GLOBALS['fd'] = $fd;
     }
