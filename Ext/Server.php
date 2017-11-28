@@ -34,6 +34,6 @@ class Server
 
 
     public static function fdExists($fd){
-        return $GLOBALS['serv']->exists($fd);
+        return $GLOBALS['serv']->exist($fd);
     }
 }
