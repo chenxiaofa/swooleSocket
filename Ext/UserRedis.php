@@ -74,7 +74,7 @@ class UserRedis
                 $redis->hSet(AirLinkOnlineRecord,$fd,$oldDevice);
                 //设置uuid的fd
                 $uuid = json_decode($oldDevice,true)['uuid'];
-                $redis->hSet(AirLinkOnlineUuid,$uuid,$fd);
+                $uuid && $redis->hSet(AirLinkOnlineUuid,$uuid,$fd);
                 //设置device_tag的fd
                 $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
                 $redis->exec();
@@ -84,7 +84,7 @@ class UserRedis
             if($newDevice){
                 $redis->multi();
                 $redis->hSet(AirLinkOnlineDevice,$device['device_tag'],$fd);
-                $redis->hSet(AirLinkOnlineUuid,$newDevice['uuid'],$fd);//设置uuid
+                $newDevice['uuid'] && $redis->hSet(AirLinkOnlineUuid,$newDevice['uuid'],$fd);//设置uuid
                 $newDevice['device_tag'] = $device['device_tag'];
                 $newDevice['start_time'] = time();
                 $newDevice['ip'] = $device['ip'];

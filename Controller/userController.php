@@ -58,14 +58,30 @@ class userController extends baseController
     public function disUserAction(){//删除没有链接的user
         $connections = Server::getConnections();
         $userFds = Redis::getInstance()->redis()->hKeys(AirLinkOnlineRecord);
-        $diff = array_diff($userFds,$connections);
-        foreach ($diff as $fd){
-            $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
-            Redis::getInstance()->redis()->hDel(AirLinkOnlineRecord,$fd);
-            $user = json_decode($user,true);
-            Redis::getInstance()->redis()->hDel(AirLinkOnlineDevice,$user['device_tag']);
-            Redis::getInstance()->redis()->hDel(AirLinkOnlineUuid,$user['uuid']);
+        if(count($connections)>0 && count($userFds)>0){
+            $diff = array_diff($userFds,$connections);
+            foreach ($diff as $fd){
+                //删除用户数据
+                $user = Redis::getInstance()->redis()->hGet(AirLinkOnlineRecord,$fd);
+                Redis::getInstance()->redis()->hDel(AirLinkOnlineRecord,$fd);
+                $user = json_decode($user,true);
+                Redis::getInstance()->redis()->hDel(AirLinkOnlineDevice,$user['device_tag']);
+                Redis::getInstance()->redis()->hDel(AirLinkOnlineUuid,$user['uuid']);
+                //删除投影记录
+                Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$fd);
+            }
+        }else{
+            if(count($connections)===0){
+                //删除用户数据
+                Redis::getInstance()->redis()->del(AirLinkOnlineRecord);
+                Redis::getInstance()->redis()->del(AirLinkOnlineDevice);
+                Redis::getInstance()->redis()->del(AirLinkOnlineUuid);
+                //删除投影记录
+                Redis::getInstance()->redis()->del(AirLinkInteractRecord);
+            }
         }
+        //还需要删除投影记录，
+
     }
 
 

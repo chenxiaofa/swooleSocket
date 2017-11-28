@@ -1,710 +1,338 @@
 
-has connected fd=>1,
-PHP Warning:  Illegal string offset 'tcp_fd' in /www/web/Swoole/Tcp.php on line 55
-PHP Warning:  Illegal string offset 'tcp_fd' in /www/web/Swoole/Tcp.php on line 78
-array(11) {
-  ["_GET"]=>
-  array(0) {
-  }
-  ["_POST"]=>
-  array(0) {
-  }
-  ["_COOKIE"]=>
-  array(0) {
-  }
-  ["_FILES"]=>
-  array(0) {
-  }
-  ["argv"]=>
-  array(1) {
-    [0]=>
-    string(7) "Tcp.php"
-  }
-  ["argc"]=>
-  int(1)
-  ["_SERVER"]=>
-  array(75) {
-    ["XDG_VTNR"]=>
-    string(1) "7"
-    ["XDG_SESSION_ID"]=>
-    string(2) "c2"
-    ["XDG_GREETER_DATA_DIR"]=>
-    string(25) "/var/lib/lightdm-data/zzt"
-    ["CLUTTER_IM_MODULE"]=>
-    string(3) "xim"
-    ["GPG_AGENT_INFO"]=>
-    string(32) "/home/zzt/.gnupg/S.gpg-agent:0:1"
-    ["VTE_VERSION"]=>
-    string(4) "4205"
-    ["TERM"]=>
-    string(14) "xterm-256color"
-    ["SHELL"]=>
-    string(9) "/bin/bash"
-    ["DERBY_HOME"]=>
-    string(29) "/usr/lib/jvm/java-8-oracle/db"
-    ["QT_LINUX_ACCESSIBILITY_ALWAYS_ON"]=>
-    string(1) "1"
-    ["WINDOWID"]=>
-    string(8) "62914566"
-    ["GNOME_KEYRING_CONTROL"]=>
-    string(0) ""
-    ["UPSTART_SESSION"]=>
-    string(51) "unix:abstract=/com/ubuntu/upstart-session/1000/1012"
-    ["GTK_MODULES"]=>
-    string(32) "gail:atk-bridge:unity-gtk-module"
-    ["USER"]=>
-    string(4) "root"
-    ["QT_ACCESSIBILITY"]=>
-    string(1) "1"
-    ["LS_COLORS"]=>
-    string(1405) "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
-    ["XDG_SESSION_PATH"]=>
-    string(40) "/org/freedesktop/DisplayManager/Session0"
-    ["XDG_SEAT_PATH"]=>
-    string(37) "/org/freedesktop/DisplayManager/Seat0"
-    ["SSH_AUTH_SOCK"]=>
-    string(26) "/run/user/1000/keyring/ssh"
-    ["DEFAULTS_PATH"]=>
-    string(36) "/usr/share/gconf/ubuntu.default.path"
-    ["XDG_CONFIG_DIRS"]=>
-    string(51) "/etc/xdg/xdg-ubuntu:/usr/share/upstart/xdg:/etc/xdg"
-    ["MAIL"]=>
-    string(14) "/var/mail/root"
-    ["DESKTOP_SESSION"]=>
-    string(6) "ubuntu"
-    ["PATH"]=>
-    string(88) "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-    ["QT_QPA_PLATFORMTHEME"]=>
-    string(11) "appmenu-qt5"
-    ["QT_IM_MODULE"]=>
-    string(5) "fcitx"
-    ["PWD"]=>
-    string(15) "/www/web/Swoole"
-    ["JOB"]=>
-    string(13) "gnome-session"
-    ["XDG_SESSION_TYPE"]=>
-    string(3) "x11"
-    ["JAVA_HOME"]=>
-    string(26) "/usr/lib/jvm/java-8-oracle"
-    ["XMODIFIERS"]=>
-    string(9) "@im=fcitx"
-    ["LANG"]=>
-    string(11) "zh_CN.UTF-8"
-    ["GNOME_KEYRING_PID"]=>
-    string(0) ""
-    ["MANDATORY_PATH"]=>
-    string(38) "/usr/share/gconf/ubuntu.mandatory.path"
-    ["GDM_LANG"]=>
-    string(5) "zh_CN"
-    ["COMPIZ_CONFIG_PROFILE"]=>
-    string(6) "ubuntu"
-    ["IM_CONFIG_PHASE"]=>
-    string(1) "1"
-    ["GDMSESSION"]=>
-    string(6) "ubuntu"
-    ["GTK2_MODULES"]=>
-    string(17) "overlay-scrollbar"
-    ["SESSIONTYPE"]=>
-    string(13) "gnome-session"
-    ["SHLVL"]=>
-    string(1) "2"
-    ["XDG_SEAT"]=>
-    string(5) "seat0"
-    ["HOME"]=>
-    string(5) "/root"
-    ["LANGUAGE"]=>
-    string(8) "zh_CN:zh"
-    ["GNOME_DESKTOP_SESSION_ID"]=>
-    string(18) "this-is-deprecated"
-    ["UPSTART_INSTANCE"]=>
-    string(0) ""
-    ["LOGNAME"]=>
-    string(4) "root"
-    ["XDG_SESSION_DESKTOP"]=>
-    string(6) "ubuntu"
-    ["UPSTART_EVENTS"]=>
-    string(16) "started starting"
-    ["J2SDKDIR"]=>
-    string(26) "/usr/lib/jvm/java-8-oracle"
-    ["DBUS_SESSION_BUS_ADDRESS"]=>
-    string(34) "unix:abstract=/tmp/dbus-Q1ciaBurpO"
-    ["XDG_DATA_DIRS"]=>
-    string(87) "/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop"
-    ["QT4_IM_MODULE"]=>
-    string(5) "fcitx"
-    ["LESSOPEN"]=>
-    string(22) "| /usr/bin/lesspipe %s"
-    ["UPSTART_JOB"]=>
-    string(21) "unity-settings-daemon"
-    ["INSTANCE"]=>
-    string(5) "Unity"
-    ["DISPLAY"]=>
-    string(2) ":0"
-    ["XDG_RUNTIME_DIR"]=>
-    string(14) "/run/user/1000"
-    ["J2REDIR"]=>
-    string(30) "/usr/lib/jvm/java-8-oracle/jre"
-    ["GTK_IM_MODULE"]=>
-    string(5) "fcitx"
-    ["XDG_CURRENT_DESKTOP"]=>
-    string(5) "Unity"
-    ["LESSCLOSE"]=>
-    string(23) "/usr/bin/lesspipe %s %s"
-    ["XAUTHORITY"]=>
-    string(21) "/home/zzt/.Xauthority"
-    ["_"]=>
-    string(18) "/usr/local/bin/php"
-    ["OLDPWD"]=>
-    string(8) "/www/web"
-    ["PHP_SELF"]=>
-    string(7) "Tcp.php"
-    ["SCRIPT_NAME"]=>
-    string(7) "Tcp.php"
-    ["SCRIPT_FILENAME"]=>
-    string(7) "Tcp.php"
-    ["PATH_TRANSLATED"]=>
-    string(7) "Tcp.php"
-    ["DOCUMENT_ROOT"]=>
-    string(0) ""
-    ["REQUEST_TIME_FLOAT"]=>
-    float(1511400916.5947)
-    ["REQUEST_TIME"]=>
-    int(1511400916)
-    ["argv"]=>
-    array(1) {
-      [0]=>
-      string(7) "Tcp.php"
-    }
-    ["argc"]=>
-    int(1)
-  }
-  ["GLOBALS"]=>
-  *RECURSION*
-  ["serv"]=>
-  object(swoole_server)#2 (30) {
-    ["onConnect"]=>
-    array(2) {
-      [0]=>
-      object(Server)#1 (2) {
-        ["server":"Server":private]=>
-        *RECURSION*
-        ["config":"Server":private]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-      [1]=>
-      string(9) "OnConnect"
-    }
-    ["onReceive"]=>
-    array(2) {
-      [0]=>
-      object(Server)#1 (2) {
-        ["server":"Server":private]=>
-        *RECURSION*
-        ["config":"Server":private]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-      [1]=>
-      string(9) "OnReceive"
-    }
-    ["onClose"]=>
-    array(2) {
-      [0]=>
-      object(Server)#1 (2) {
-        ["server":"Server":private]=>
-        *RECURSION*
-        ["config":"Server":private]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-      [1]=>
-      string(7) "OnClose"
-    }
-    ["onPacket"]=>
-    NULL
-    ["onBufferFull"]=>
-    NULL
-    ["onBufferEmpty"]=>
-    NULL
-    ["onStart"]=>
-    NULL
-    ["onShutdown"]=>
-    NULL
-    ["onWorkerStart"]=>
-    array(2) {
-      [0]=>
-      object(Server)#1 (2) {
-        ["server":"Server":private]=>
-        *RECURSION*
-        ["config":"Server":private]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-      [1]=>
-      string(13) "OnWorkerStart"
-    }
-    ["onWorkerStop"]=>
-    NULL
-    ["onWorkerExit"]=>
-    NULL
-    ["onWorkerError"]=>
-    NULL
-    ["onTask"]=>
-    array(2) {
-      [0]=>
-      object(Server)#1 (2) {
-        ["server":"Server":private]=>
-        *RECURSION*
-        ["config":"Server":private]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-      [1]=>
-      string(6) "OnTask"
-    }
-    ["onFinish"]=>
-    array(2) {
-      [0]=>
-      object(Server)#1 (2) {
-        ["server":"Server":private]=>
-        *RECURSION*
-        ["config":"Server":private]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-      [1]=>
-      string(8) "OnFinish"
-    }
-    ["onManagerStart"]=>
-    NULL
-    ["onManagerStop"]=>
-    NULL
-    ["onPipeMessage"]=>
-    NULL
-    ["setting"]=>
-    array(10) {
-      ["open_tcp_keepalive"]=>
-      bool(true)
-      ["tcp_keepidle"]=>
-      int(30)
-      ["tcp_keepcount"]=>
-      int(2)
-      ["tcp_keepinterval"]=>
-      int(10)
-      ["daemonize"]=>
-      bool(true)
-      ["worker_num"]=>
-      int(2)
-      ["task_worker_num"]=>
-      int(2)
-      ["log_file"]=>
-      string(25) "/www/web/Swoole/ceshi.log"
-      ["buffer_output_size"]=>
-      int(2097152)
-      ["max_connection"]=>
-      int(1024)
-    }
-    ["connections"]=>
-    object(swoole_connection_iterator)#3 (0) {
-    }
-    ["host"]=>
-    string(7) "0.0.0.0"
-    ["port"]=>
-    int(9502)
-    ["type"]=>
-    int(1)
-    ["mode"]=>
-    int(3)
-    ["ports"]=>
-    array(1) {
-      [0]=>
-      object(swoole_server_port)#4 (15) {
-        ["onConnect"]=>
-        array(2) {
-          [0]=>
-          object(Server)#1 (2) {
-            ["server":"Server":private]=>
-            *RECURSION*
-            ["config":"Server":private]=>
-            array(8) {
-              ["open_tcp_keepalive"]=>
-              bool(true)
-              ["tcp_keepidle"]=>
-              int(30)
-              ["tcp_keepcount"]=>
-              int(2)
-              ["tcp_keepinterval"]=>
-              int(10)
-              ["daemonize"]=>
-              bool(true)
-              ["worker_num"]=>
-              int(2)
-              ["task_worker_num"]=>
-              int(2)
-              ["log_file"]=>
-              string(25) "/www/web/Swoole/ceshi.log"
-            }
-          }
-          [1]=>
-          string(9) "OnConnect"
-        }
-        ["onReceive"]=>
-        array(2) {
-          [0]=>
-          object(Server)#1 (2) {
-            ["server":"Server":private]=>
-            *RECURSION*
-            ["config":"Server":private]=>
-            array(8) {
-              ["open_tcp_keepalive"]=>
-              bool(true)
-              ["tcp_keepidle"]=>
-              int(30)
-              ["tcp_keepcount"]=>
-              int(2)
-              ["tcp_keepinterval"]=>
-              int(10)
-              ["daemonize"]=>
-              bool(true)
-              ["worker_num"]=>
-              int(2)
-              ["task_worker_num"]=>
-              int(2)
-              ["log_file"]=>
-              string(25) "/www/web/Swoole/ceshi.log"
-            }
-          }
-          [1]=>
-          string(9) "OnReceive"
-        }
-        ["onClose"]=>
-        array(2) {
-          [0]=>
-          object(Server)#1 (2) {
-            ["server":"Server":private]=>
-            *RECURSION*
-            ["config":"Server":private]=>
-            array(8) {
-              ["open_tcp_keepalive"]=>
-              bool(true)
-              ["tcp_keepidle"]=>
-              int(30)
-              ["tcp_keepcount"]=>
-              int(2)
-              ["tcp_keepinterval"]=>
-              int(10)
-              ["daemonize"]=>
-              bool(true)
-              ["worker_num"]=>
-              int(2)
-              ["task_worker_num"]=>
-              int(2)
-              ["log_file"]=>
-              string(25) "/www/web/Swoole/ceshi.log"
-            }
-          }
-          [1]=>
-          string(7) "OnClose"
-        }
-        ["onPacket"]=>
-        NULL
-        ["onBufferFull"]=>
-        NULL
-        ["onBufferEmpty"]=>
-        NULL
-        ["onRequest"]=>
-        NULL
-        ["onHandShake"]=>
-        NULL
-        ["onMessage"]=>
-        NULL
-        ["onOpen"]=>
-        NULL
-        ["host"]=>
-        string(7) "0.0.0.0"
-        ["port"]=>
-        int(9502)
-        ["type"]=>
-        int(1)
-        ["sock"]=>
-        int(4)
-        ["setting"]=>
-        array(8) {
-          ["open_tcp_keepalive"]=>
-          bool(true)
-          ["tcp_keepidle"]=>
-          int(30)
-          ["tcp_keepcount"]=>
-          int(2)
-          ["tcp_keepinterval"]=>
-          int(10)
-          ["daemonize"]=>
-          bool(true)
-          ["worker_num"]=>
-          int(2)
-          ["task_worker_num"]=>
-          int(2)
-          ["log_file"]=>
-          string(25) "/www/web/Swoole/ceshi.log"
-        }
-      }
-    }
-    ["master_pid"]=>
-    int(8407)
-    ["manager_pid"]=>
-    int(8408)
-    ["worker_id"]=>
-    int(2)
-    ["taskworker"]=>
-    bool(true)
-    ["worker_pid"]=>
-    int(8411)
-    ["index"]=>
-    object(swoole\Run)#5 (1) {
-      ["dispatch":"swoole\Run":private]=>
-      array(0) {
-      }
-    }
-  }
-  ["ip"]=>
-  string(9) "127.0.0.1"
-  ["fd"]=>
-  string(1) "1"
-}
+timer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 09:40:16 *8413.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 09:40:16 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 09:45:19 *8488.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 09:45:19 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedhas disConnected fd = 201,
+run path:user/disconnect
+has disConnected fd = 202,
+run path:user/disconnect
+has disConnected fd = 204,
+run path:user/disconnect
+has disConnected fd = 203,
+has disConnected fd = 206,
+run path:user/disconnect
+run path:user/disconnect
+has disConnected fd = 205,
+run path:user/disconnect
+has disConnected fd = 210,
+run path:user/disconnect
+has disConnected fd = 207,
+run path:user/disconnect
+has disConnected fd = 211,
+has disConnected fd = 212,
+has disConnected fd = 208,
+has disConnected fd = 213,
+has disConnected fd = 214,
+has disConnected fd = 209,
+has disConnected fd = 216,
+has disConnected fd = 215,
+has disConnected fd = 218,
+has disConnected fd = 217,
+has disConnected fd = 220,
+has disConnected fd = 219,
+run path:user/disconnect
+run path:run path:user/disconnectuser/disconnect
+
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+run path:run path:user/disconnectuser/disconnect
+
+timer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 09:50:19 *9118.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 09:50:19 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 09:55:22 *9181.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 09:55:22 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedhas connected fd=>221,
+run path:user/online
+has connected fd=>222,
+run path:user/online
+has connected fd=>223,
+has connected fd=>224,
+has connected fd=>225,
+run path:user/online
+run path:user/online
+run path:user/online
+has connected fd=>226,
+run path:user/online
+has connected fd=>227,
+run path:user/online
+has connected fd=>228,
+run path:user/online
+has connected fd=>229,
+has connected fd=>230,
+has connected fd=>231,
+has connected fd=>232,
+has connected fd=>234,
+has connected fd=>233,
+has connected fd=>235,
+has connected fd=>236,
+has connected fd=>237,
+has connected fd=>238,
+has connected fd=>239,
+has connected fd=>240,
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '2434c098864595022967750_01' and `users`.app_id=1 limit 1 
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'BFEBFBFF00030678a9ce2892-679c-436e-a3af-bee91a29f2ab_01' and `users`.app_id=1 limit 1 
+old fd :bool(false)
+
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '45f5ce92864630031615437_01' and `users`.app_id=1 limit 1 
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '6JRDU16731002118861010031322693_01' and `users`.app_id=1 limit 1 
+old fd :old fd :bool(false)
+bool(false)
+
+
+old fd :bool(false)
+
+old fd :bool(false)
+
+CALL: 
+CALL: 
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'BFEBFBFF0001067Af85ca5cb-c3ad-471a-9494-0e3e4fe753cf_01' and `users`.app_id=1 limit 1 select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '331930dd864416030468717_01' and `users`.app_id=1 limit 1 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '6b1c5325863817032028600_01' and `users`.app_id=1 limit 1 
+CALL: 
+
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'YP5PMZSG99999999863050035005017_01' and `users`.app_id=1 limit 1 
+run path:user/online
+run path:user/online
+run path:user/online
+run path:user/online
+run path:run path:user/onlineuser/online
+
+run path:user/online
+old fd :old fd :bool(false)
+bool(false)
+
+
+old fd :bool(false)
+
+CALL: 
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '12a6e4ea866442036010889_01' and `users`.app_id=1 limit 1 select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'BFEBFBFF000906E9000294a4-1d44-4851-bad9-bb5be020da88_01' and `users`.app_id=1 limit 1 
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'b2dddcad358811078177373_01' and `users`.app_id=1 limit 1 
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'BFEBFBFF000206A7{bdb1544c-e797-4e0d-bd76-8be8a0030c94}_02' and `users`.app_id=1 limit 1 
+old fd :old fd :old fd :bool(false)
+bool(false)
+bool(false)
+
+run path:
+
+user/online
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'BFEBFBFF000306A900055aa1-311f-4580-b439-aaaa4fcb6767_01' and `users`.app_id=1 limit 1 
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'd0fec2a4868980022855633_01' and `users`.app_id=1 limit 1 CALL: 
+
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'S9B4C17415008835864647035561169_01' and `users`.app_id=1 limit 1 
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= 'BFEBFBFF000206A7{bdb1544c-e797-4e0d-bd76-8be8a0030c94}_01' and `users`.app_id=1 limit 1 
+run path:user/online
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '7865041865132032752433_01' and `users`.app_id=1 limit 1 
+run path:user/online
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '223d900d0903869435029653399_01' and `users`.app_id=1 limit 1 
+run path:user/online
+run path:user/online
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '0123456789ABCDEFA100005DC4BF16_01' and `users`.app_id=1 limit 1 
+old fd :bool(false)
+
+CALL: 
+select `users`.`id` as user_id ,`users`.`uuid` as uuid,`user_apps`.`app_version` as app_version,`user_apps`.`app_edition` as app_edition from `users` RIGHT JOIN user_apps on users.id = user_apps.user_id WHERE device_tag= '00058ef8-4122-4093-b7ab-969ed6492fa9_01' and `users`.app_id=1 limit 1 
+run path:event/interact
+run path:event/interact
+run path:run path:event/interactevent/interact
+
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+run path:event/interact
+has disConnected fd = 221,
+run path:user/disconnect
+has disConnected fd = 222,
+run path:user/disconnect
+has disConnected fd = 223,
+has disConnected fd = 225,
+run path:user/disconnect
+run path:user/disconnect
+has disConnected fd = 224,
+run path:user/disconnect
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+has disConnected fd = 226,
+run path:user/disconnect
+has disConnected fd = 227,
+run path:user/disconnect
+has disConnected fd = 228,
+run path:user/disconnect
+has disConnected fd = 229,
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+has disConnected fd = 230,
+has disConnected fd = 231,
+has disConnected fd = 233,
+has disConnected fd = 235,
+has disConnected fd = 234,
+has disConnected fd = 236,
+has disConnected fd = 232,
+has disConnected fd = 237,
+has disConnected fd = 238,
+has disConnected fd = 239,
+has disConnected fd = 240,
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+CALLSTATIC:
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+run path:user/disconnect
+CALLSTATIC:
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+run path:user/disconnect
+run path:user/disconnect
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+CALLSTATIC:
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+run path:user/disconnect
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+run path:run path:user/disconnectuser/disconnect
+
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+run path:user/disconnect
+run path:user/disconnect
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+run path:user/disconnect
+CALLSTATIC:
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+
+CALLSTATIC:
+insert into interact_users(`user_id`, `interact_user_id`, `is_host`, `start_time`, `end_time`)value(:user_idValue, :interact_user_idValue, :is_hostValue, :start_timeValue, :end_timeValue)
+CALLSTATIC:
+insert into user_onlines(`start_time`, `end_time`, `user_id`, `ip_addr`)value(:start_timeValue, :end_timeValue, :user_idValue, :ip_addrValue)
+timer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:00:22 *9210.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:00:22 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:05:23 *9228.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:05:23 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:10:23 *9249.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:10:23 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:15:25 *9270.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:15:25 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:20:26 *9309.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:20:26 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:25:27 *9405.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:25:27 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:30:27 *9429.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:30:27 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:35:27 *9446.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:35:27 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:40:28 *9467.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:40:28 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:45:28 *9483.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:45:28 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:50:34 *9532.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:50:34 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 10:55:34 *9613.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 10:55:34 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:00:35 *9712.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:00:35 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finishedtimer is ontime 
 请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:05:35 *9755.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:05:35 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:10:35 *9782.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:10:35 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:15:35 *9847.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:15:35 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:20:36 *9904.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:20:36 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:25:36 *9935.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:25:36 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:30:36 *9972.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:30:36 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:35:36 *10024.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:35:36 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:40:37 *10056.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:40:37 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:45:37 *10090.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:45:37 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:50:37 *10167.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:50:37 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
-请求断开数量：0
-PHP Notice:  Undefined index: serv in /www/web/Swoole/Ext/Server.php on line 21
-PHP Fatal error:  Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21
-[2017-11-23 11:55:37 *10216.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Call to a member function connection_list() on null in /www/web/Swoole/Ext/Server.php on line 21.
-[2017-11-23 11:55:37 $8408.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+connection list is finished

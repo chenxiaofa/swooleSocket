@@ -19,8 +19,8 @@ class Server
         'tcp_keepcount'=>2,
         'tcp_keepinterval'=>10,
         'daemonize' => true,
-        'worker_num'=>2,
-        'task_worker_num'=>2,
+        'worker_num'=>4,
+        'task_worker_num'=>8,
         'log_file' => __DIR__.'/ceshi.log'
     ];
 
@@ -62,26 +62,19 @@ class Server
             }
         }
 
-
-//        echo "has Received form $fd=> $data","\n";
 //        $data = json_decode($data,true);
-//        $data['params']['fd'] = $fd;
-//
-//        if(isset($data['path'])&&$data['params']){
-//            $serv->index->run($data['path'],$data['params']);
-//        }
-//        echo "Receive 执行结束 \n";
-
+//        $data['tcp_fd'] = $fd;
+//        $serv->task($data);
     }
 
     public function onTask($serv,$task_id,$from_id,$data){
-        echo "task 接受的data：\n";
-        var_dump($data);
-        echo "\n";
         $this->copyGlobal($serv,$data['tcp_fd']);
+        $data['params']['fd'] = $data['tcp_fd'];
         unset($data['tcp_fd']);
         $data = $this->transRoute($data);
+
         if(isset($data['path'])){
+            echo "run path:",$data['path'],"\n";
             $serv->index->run($data['path'],$data['params']);
         }
         //调度任务，操作数据
@@ -100,6 +93,7 @@ class Server
         //定时任务，删除僵尸用户数据，
         if($work_id == 0){
             $serv->tick(5*60000,function ($timer_id)use($serv){
+                echo "timer is ontime \n";
                 $serv->index->run('user/disWechat',[]);
                 $serv->index->run('user/disUser',[]);
             });
