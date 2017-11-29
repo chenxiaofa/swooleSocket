@@ -121,7 +121,7 @@ class userController extends baseController
             $openids = json_decode($openids, true);
             //$this->redis->hdel(AirLinkDeviceWechat,$fd);
             $device = UserRedis::getDeviceByFd($fd);
-           // $this->redis->hDel(AirLinkDeviceTagWechat, $device['device_tag']);
+            $this->redis->hDel(AirLinkDeviceTagWechat, $device['device_tag']);
             $this->disBindWechat($openids);//需要做通知威信用户，所以不能直接删除
         }
     }
