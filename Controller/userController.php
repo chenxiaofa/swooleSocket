@@ -115,6 +115,7 @@ class userController extends baseController
 
     public function delWechatDeviceBind($fd)
     {
+        echo "del WechatDeviceBind \n";
         if ($this->redis->hExists(AirLinkDeviceWechat, $fd)) {
             $openids = $this->redis->hget(AirLinkDeviceWechat, $fd);
             $openids = json_decode($openids, true);
