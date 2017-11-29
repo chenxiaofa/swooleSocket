@@ -138,9 +138,8 @@ class userController extends baseController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_PORT, 80);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-
         $output = curl_exec($ch);
-        var_dump(curl_error($ch));
+        var_dump($output);
         curl_close($ch);
     }
 
