@@ -129,6 +129,7 @@ class userController extends baseController
 
     public function disBindWechat($openids)
     {
+        echo "disBindWechat:\n";
         $config = env('default');
         $url = $config['hostname'] . '/wechat/disbind';
         $postData = $openids;
@@ -137,6 +138,7 @@ class userController extends baseController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_PORT, 80);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
         $output = curl_exec($ch);
         var_dump(curl_error($ch));
         curl_close($ch);
