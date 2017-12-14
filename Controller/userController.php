@@ -52,7 +52,7 @@ class userController extends baseController
         $deleteWechats = [];
         foreach ($wechatDevice as $wechat => $fd) {
             $fd = json_decode($fd, true);
-            if ($fd['time'] + 2 * 60 < time()) {
+            if ($fd['time'] + 30 * 60 < time()) {
                 $deleteWechats[] = $wechat;
                 if (Server::fdExists($fd['fd'])) {
                     Server::send(json_encode(['type' => 'disbind', 'openid' => $wechat]), $fd['fd']);
@@ -72,10 +72,7 @@ class userController extends baseController
     {//删除没有链接的user
         $connections = Server::getConnections();
         $userFds = Redis::getInstance()->redis()->hKeys(AirLinkOnlineRecord);
-        echo "dis user";
-        var_dump($connections);
-        var_dump($userFds);
-        echo "\n";
+
         if (count($connections) > 0 && count($userFds) > 0) {
             $diff = array_diff($userFds, $connections);
             echo "diff is :\n";
@@ -91,7 +88,6 @@ class userController extends baseController
                 Redis::getInstance()->redis()->hDel(AirLinkInteractRecord, $fd);
             }
         }
-        //还需要删除投影记录，
 
     }
 
