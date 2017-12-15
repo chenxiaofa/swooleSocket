@@ -56,7 +56,7 @@ class eventController extends baseController
                     'start_time'=>time()
                 ];
                 Redis::getInstance()->redis()->hSet(AirLinkInteractRecord,$params['fd'],json_encode($record));
-
+                $this->topInteractHour();
             }
         }else{//结束投影
             $interact = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord,$params['fd']),true);
@@ -89,9 +89,9 @@ class eventController extends baseController
 
     private function topInteractHour(){
         $interactNum = $this->redis->hLen(AirLinkInteractRecord);
-        $topInteract = $this->redis->hGet(AirLinkTopInteract,date("H"));
+        $topInteract = $this->redis->hGet(AirLinkTopInteract,intval(date("H")));
         if($interactNum > $topInteract){
-            $this->redis->hSet(AirLinkTopInteract,date("H"),$interactNum);
+            $this->redis->hSet(AirLinkTopInteract,intval(date("H")),$interactNum);
         }
 
     }

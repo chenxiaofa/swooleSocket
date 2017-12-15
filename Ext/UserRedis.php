@@ -128,9 +128,9 @@ class UserRedis
      */
     public static function personNum(){
         $onlineRecords = Redis::getInstance()->redis()->hLen(AirLinkOnlineRecord);
-        $topOnlineRecord = Redis::getInstance()->redis()->hGet(AirLinkTopUser,date("H"));
+        $topOnlineRecord = Redis::getInstance()->redis()->hGet(AirLinkTopUser,intval(date("H")));
         if($onlineRecords>$topOnlineRecord){
-            Redis::getInstance()->redis()->hSet(AirLinkTopUser,date("H"),$onlineRecords);
+            Redis::getInstance()->redis()->hSet(AirLinkTopUser,intval(date("H")),$onlineRecords);
         }
     }
 
