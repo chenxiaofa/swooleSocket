@@ -127,8 +127,10 @@ class UserRedis
      * 统计人数峰值
      */
     public static function personNum(){
-        if(Redis::getInstance()->redis()->hLen(AirLinkOnlineRecord)>Redis::getInstance()->redis()->get(AirLinkTopUser)){
-            Redis::getInstance()->redis()->Set(AirLinkTopUser,intval(Redis::getInstance()->redis()->get(AirLinkTopUser))+1);
+        $onlineRecords = Redis::getInstance()->redis()->hLen(AirLinkOnlineRecord);
+        $topOnlineRecord = Redis::getInstance()->redis()->hGet(AirLinkTopUser,date("H"));
+        if($onlineRecords>$topOnlineRecord){
+            Redis::getInstance()->redis()->hSet(AirLinkTopUser,date("H"),$onlineRecords);
         }
     }
 

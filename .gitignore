@@ -1,2 +1,4 @@
 .env
 .idea
+config/database.php
+config/redis.php

@@ -23,7 +23,7 @@ class Server
         while (true){
             $conn_list = $GLOBALS['serv']->connection_list($start_fd,50);
             if($conn_list===false || count($conn_list) === 0){
-                echo "connection list is finished";
+                echo "connection list is finished ".count($total_fds)." \n";
                 break;
             }
             $start_fd = end($conn_list);
