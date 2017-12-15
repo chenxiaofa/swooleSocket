@@ -52,6 +52,7 @@ class eventController extends baseController
                     'user_id'=>$device['user_id'],
                     'interact_user_id'=>$otherDevice['user_id'],
                     'is_host'=>$params['is_host'],
+                    'ip_addr'=>$GLOBALS['ip'],
                     'start_time'=>time()
                 ];
                 Redis::getInstance()->redis()->hSet(AirLinkInteractRecord,$params['fd'],json_encode($record));
