@@ -1,4 +1,5 @@
 .env
 .idea
+ceshi.log
 config/database.php
 config/redis.php
