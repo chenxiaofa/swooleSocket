@@ -53,7 +53,10 @@ class Server
 
     public function OnReceive($serv,$fd,$from_id,$data){
 
-        $data = decode($data);
+        $data = array_unique(decode($data));
+        echo "接受的数据：";
+        var_dump($data);
+        echo "\n";
         foreach ($data as $val){
             $val = json_decode($val,true);
             if(is_array($val) && !empty($val)){
@@ -72,7 +75,7 @@ class Server
         //$data['params']['fd'] = $data['tcp_fd'];
         unset($data['tcp_fd']);
         $data = $this->transRoute($data);
-        var_dump($data);
+        //var_dump($data);
         if(isset($data['path'])){
             echo "run path:",$data['path'],"\n";
             $serv->index->run($data['path'],$data['params']);
