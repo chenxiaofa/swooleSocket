@@ -85,7 +85,8 @@ class userController extends baseController
                 Redis::getInstance()->redis()->hDel(AirLinkOnlineDevice, $user['device_tag']);
                 Redis::getInstance()->redis()->hDel(AirLinkOnlineUuid, $user['uuid']);
                 //删除投影记录
-                Redis::getInstance()->redis()->hDel(AirLinkInteractRecord, $fd);
+                Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$fd);
+
             }
         }
 

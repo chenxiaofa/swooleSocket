@@ -7,11 +7,11 @@
  */
 
 return [
-    'dbHost'=>'106.75.176.185',
+    'dbHost'=>'host',
 
-    'dbUser'=>'airlink',
+    'dbUser'=>'username',
 
-    'dbPwd'=>'airlinktest8577',
+    'dbPwd'=>'pwd',
 
-    'dbName'=>'airlink_new',
+    'dbName'=>'dbName',
 ];
