@@ -9,6 +9,7 @@
 const AirLinkOnlineRecord = 'airlink_online_record';
 const AirLinkOnlineDevice = 'airlink_online_device';
 const AirLinkInteractRecord = 'airlink_interact_record';
+const TopUsers = "top_users";
 const AirLinkDeviceTagWechat = 'airlink_device_tag_wechat';
 const AirLinkWechatDevice = 'airlink_wechat_device';
 const AirLinkDeviceWechat = 'airlink_device_wechat';
