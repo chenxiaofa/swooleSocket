@@ -143,11 +143,13 @@ class userController extends baseController
 
     public function disInteract($fd)
     {
-        $interact = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord, $fd), true);
-        if ($interact) {
+        $interacts = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord, $fd), true);
+        if ($interacts) {
             Redis::getInstance()->redis()->hDel(AirLinkInteractRecord, $fd);
-            $interact['end_time'] = time();
-            InteractUser::add($interact);
+            foreach ($interacts as $interact_other_user_id =>$interact){
+                $interact['end_time'] = time();
+                InteractUser::add($interact);
+            }
         }
 
     }

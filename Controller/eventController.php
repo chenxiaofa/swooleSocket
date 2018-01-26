@@ -48,23 +48,30 @@ class eventController extends baseController
         $otherDevice = UserRedis::getDeviceByFd($otherFd);
         if($params['interact_status']== 'start'){//开始投影
             if($device && $otherDevice && $otherFd){
-                $record = [
+                $records = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord,$params['fd']),true);
+                $records[$otherDevice['user_id']] = [
                     'user_id'=>$device['user_id'],
                     'interact_user_id'=>$otherDevice['user_id'],
                     'is_host'=>$params['is_host'],
                     'ip_addr'=>$GLOBALS['ip'],
                     'start_time'=>time()
                 ];
-                Redis::getInstance()->redis()->hSet(AirLinkInteractRecord,$params['fd'],json_encode($record));
+                Redis::getInstance()->redis()->hSet(AirLinkInteractRecord,$params['fd'],json_encode($records));
 		$this->topInteractHour();
             }
         }else{//结束投影
-            $interact = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord,$params['fd']),true);
-            if($interact){
-                Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$params['fd']);
-                $interact['end_time'] = time();
-                //$interact['ip_addr'] = $GLOBALS['ip'];
-                InteractUser::add($interact);
+            if($device && $otherDevice){
+                $records = json_decode(Redis::getInstance()->redis()->hGet(AirLinkInteractRecord,$params['fd']),true);
+                if(isset($records[$otherDevice['user_id']])){
+                    $records[$otherDevice['user_id']]['end_time'] = time();
+                    InteractUser::add($records[$otherDevice['user_id']]);
+                    unset($records[$otherDevice['user_id']]);
+                    if(count($records)==0){
+                        Redis::getInstance()->redis()->hDel(AirLinkInteractRecord,$params['fd']);
+                    }else{
+                        Redis::getInstance()->redis()->hSet(AirLinkInteractRecord,$params['fd'],json_encode($records));
+                    }
+                }
             }
         }
 
