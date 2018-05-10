@@ -14,26 +14,34 @@ use Model\testModel;
 class indexController
 {
     public $params = null;
+    //fd 和 uuid 各自进行删除
 
-    public function __construct()
+    public function initAction($params)
     {
-        $this->params = "construct";
+        if (count(array_diff(['uuid'],array_keys($params)))>0){
+            Server::failedSend($GLOBALS['fd'],[],'params is required');
+        }
 
-        echo "Controller>>>开始执行\n";
+        $params['created_at'] = time();
+        $params['meeting_id'] = null;
+
+        $redisHandel = Redis::getInstance();
+        $redis = $redisHandel->get();
+
+        $oldDeviceFd = $redis->hget(OnlineDeviceToFd,$params['uuid']);
+
+        $redis->multi();
+        if($oldDeviceFd){//如果存在旧设备，则删除旧的fd基础信息
+            $redis->hdel(OnlineFDToDevice,$oldDeviceFd);
+        }
+        $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($params));
+        $redis->hset(OnlineDeviceToFd,$params['uuid'],$GLOBALS['fd']);
+        $redis->exec();
+
+        $redisHandel->put($redis);
+
+        $GLOBALS['serv']->send($GLOBALS['fd'],"已经绑定初始化成功\r\n");
+        //var_dump($params);
     }
 
-    public function __destruct()
-    {
-        $this->params = "destruct";
-        echo "Controller >>>结束执行 \n";
-        // TODO: Implement __destruct() method.
-    }
-
-    public function indexAction($params)
-    {
-        echo $this->params;
-       // var_dump(testModel::where(['c1'=>2])->select());
-        var_dump(testModel::add(['c1'=>'aaa','c2'=>'bbbb','c3'=>'cccc']));
-        var_dump(Redis::getInstance()->redis()->keys("*"));
-    }
 }

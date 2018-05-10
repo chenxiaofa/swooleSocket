@@ -12,14 +12,16 @@ class Server
     private $server;
 
     private $config = [
-        'heartbeat_check_interval' => 20,
-        'heartbeat_idle_time' => 60 * 60,
+        'open_tcp_keepalive' => 1,
+        'tcp_keepidle' => 30,
+        'tcp_keepcount' => 2,
+        'tcp_keepinterval' => 10,
         'daemonize' => true,
         'worker_num' => 2,
-        'log_level'=>3,
-        'open_eof_split'=>true,
-        'package_eof'=>"\r\n",
-        'log_file' => '/www/web/Swoole/ceshi.log'
+        'log_level' => 3,
+        'open_eof_split' => true,
+        'package_eof' => "\r\n",
+        'log_file' => __DIR__ . '/ceshi.log'
     ];
 
 
@@ -33,7 +35,7 @@ class Server
         $this->server->on('Receive', array($this, "OnReceive"));
         $this->server->on('Task', array($this, "OnTask"));
         $this->server->on('Finish', array($this, "OnFinish"));
-        $this->server->on("WorkerStart",array($this,"OnWorkerStart"));
+        $this->server->on("WorkerStart", array($this, "OnWorkerStart"));
         $this->server->start();
     }
 
@@ -45,39 +47,65 @@ class Server
 
     public function OnClose($serv, $fd)
     {
+
+        $this->copyGlobal($serv, $fd);
+        $serv->index->run('connect/disconnect', ['fd' => $fd]);
         echo "has disConnected fd = $fd,\n";
     }
 
-    public function OnReceive($serv,$fd,$from_id,$data){
-        echo "has Received form $fd=> $data","\n";
-        $data = json_decode($data,true);
-        $this->copyGlobal($serv,$fd,$from_id);
-        if(isset($data['path'])&&$data['params']){
-            $serv->index->run($data['path'],$data['params']);
+    public function OnReceive($serv, $fd, $from_id, $data)
+    {
+        try {
+            $data = unserialize(trim($data));
+            var_dump($data);
+
+            $this->copyGlobal($serv, $fd);
+            if (isset($data['path']) && $data['params']) {
+                $serv->index->run($data['path'], $data['params']);
+            }
+            echo "Receive 执行结束 \n";
+
+        } catch (Exception $e) {
+            echo "报错： " . $e->getMessage() . "\n";
+            $serv->send($fd, $e->getMessage());
         }
-        echo "Receive 执行结束 \n";
 
     }
 
-    public function onTask($serv,$task_id,$from_id,$data){
+    public function onTask($serv, $task_id, $from_id, $data)
+    {
         echo "onTask>>>  TaskId:$task_id, FromId:$from_id,Data:$data \n";
         //调度任务，操作数据
 
     }
 
-    public function onFinish($serv,$task_id,$data){
+    public function onFinish($serv, $task_id, $data)
+    {
         echo "onFinish>>>  TaskId:$task_id,Data:$data \n";
     }
 
-    public function onWorkerStart($serv,$work_id){
+    public function onWorkerStart($serv, $work_id)
+    {
         include "run.php";
-        $serv->index = new  \swoole\Run();
+        $serv->index = new  \swooleSocket\Run();
+
+
+        if ($work_id == 0) {
+            $serv->tick(60000, function (
+                $timer_id
+            ) use ($serv) {
+              //  $serv->index->run('dirtyDataHandel/timingDel', []);
+            });
+        }
+
+
     }
 
-    public function copyGlobal($serv,$fd,$from_id){
+    public function copyGlobal($serv, $fd)
+    {
         $GLOBALS['serv'] = &$serv;
         $GLOBALS['fd'] = $fd;
-        $GLOBALS['from_id'] = $from_id;
+        //$GLOBALS['from_id'] = $from_id;
     }
 
 

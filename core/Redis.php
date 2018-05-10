@@ -34,7 +34,9 @@ class Redis
 
         $redis = new \Swoole\Coroutine\Redis();
         $redisConfig = env('redis');
-        return $redis->connect($redisConfig['host'],$redisConfig['port']);
+        $connect = $redis->connect($redisConfig['host'],$redisConfig['port']);
+
+        return $redis;
     }
 
     public static function getInstance()

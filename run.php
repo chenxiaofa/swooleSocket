@@ -1,12 +1,11 @@
 <?php
-namespace swoole;
+namespace swooleSocket;
 
 include_once "core/Loader.php";
 
 include_once ("define.php");
 include_once ("function.php");
-
-
+include_once (__DIR__.'/./config/Const.php');
 
 class Run{
 
