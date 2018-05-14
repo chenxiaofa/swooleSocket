@@ -18,13 +18,13 @@ class Server
 
     }
 
-    public static function successSend($fd,$data=[],$message='success'){
-        $message = ['code'=>'success','message'=>$message,'data'=>$data];
+    public static function successSend($fd,$data=[],$code =SuccessMessage, $message='success'){
+        $message = ['code' => $code,'message'=>$message,'data'=>$data];
         self::send(serialize($message),$fd);
     }
 
-    public static function failedSend($fd,$data=[],$message='failed'){
-        $message = ['code'=>'failed','message'=>$message,'data'=>$data];
+    public static function failedSend($fd,$data=[],$code=FatalError,$message='failed'){
+        $message = ['code'=>$code,'message'=>$message,'data'=>$data];
         self::send(serialize($message),$fd);
     }
 

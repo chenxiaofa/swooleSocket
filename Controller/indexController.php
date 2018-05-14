@@ -9,6 +9,7 @@
 namespace Controller;
 
 use core\Redis;
+use Ext\Server;
 use Model\testModel;
 
 class indexController
@@ -19,7 +20,7 @@ class indexController
     public function initAction($params)
     {
         if (count(array_diff(['uuid'],array_keys($params)))>0){
-            Server::failedSend($GLOBALS['fd'],[],'params is required');
+            Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError);
         }
 
         $params['created_at'] = time();
@@ -40,7 +41,8 @@ class indexController
 
         $redisHandel->put($redis);
 
-        $GLOBALS['serv']->send($GLOBALS['fd'],"已经绑定初始化成功\r\n");
+        Server::successSend($GLOBALS['fd'],[]);
+        //$GLOBALS['serv']->send($GLOBALS['fd'],"已经绑定初始化成功\r\n");
         //var_dump($params);
     }
 

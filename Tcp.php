@@ -67,7 +67,7 @@ class Server
 
         } catch (Exception $e) {
             echo "报错： " . $e->getMessage() . "\n";
-            $serv->send($fd, $e->getMessage());
+            $serv->send($fd,serialize(['code'=>-1001,'message'=>$e->getMessage(),'data'=>[]]));
         }
 
     }

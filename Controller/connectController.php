@@ -17,7 +17,7 @@ class connectController
         //异常断开，重新链接，替换fd即可
         public function reconnectAction($params){
             if (count(array_diff(['uuid'],array_keys($params)))>0){
-                Server::failedSend($GLOBALS['fd'],[],'params is required');
+                Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError);
             }
             $redisHandel = Redis::getInstance();
             $redis = $redisHandel->get();
@@ -28,7 +28,7 @@ class connectController
             $redisHandel->put($redis);
             $meeting = $redis->hget(OnlineMeeting,$deviceInfo['meeting_id']);
             $meeting = $meeting?unserialize($meeting):[];
-            Server::successSend($GLOBALS['fd'],$meeting);
+            Server::successSend($GLOBALS['fd'],$meeting,FlushMeetingMembersSuccess);
         }
 
         // 正常断开，删除fd，存在会议的，需要先退出会议
