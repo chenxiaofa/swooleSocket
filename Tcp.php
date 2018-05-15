@@ -19,8 +19,8 @@ class Server
         'daemonize' => true,
         'worker_num' => 2,
         'log_level' => 3,
-        'open_eof_split' => true,
-        'package_eof' => "\r\n",
+//        'open_eof_split' => true,
+//        'package_eof' => "\r\n",
         'log_file' => __DIR__ . '/ceshi.log'
     ];
 
