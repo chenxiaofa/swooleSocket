@@ -41,7 +41,7 @@ class meetingController
         $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($managerInfo));
 
         $redisHandel->put($redis);
-        Server::successSend($GLOBALS['fd'],[]);
+        Server::successSend($GLOBALS['fd'],[],MeetingCreateSuccess);
     }
 
     /**
@@ -134,9 +134,9 @@ class meetingController
                     Server::successSend($disFd,[],QuitMeetingSuccess);
 
                     if(isset($params['is_disconnect'])&& $params['is_disconnect']==true){//兼容断线
-                        Server::successSend($redis->hget(OnlineDeviceToFd,$meeting['manager']),[],PromiseQuitMeetingSuccess);
+                        Server::successSend($redis->hget(OnlineDeviceToFd,$meeting['manager']),$meeting,PromiseQuitMeetingSuccess);
                     }else{
-                        Server::successSend($GLOBALS['fd'],[],PromiseQuitMeetingSuccess);
+                        Server::successSend($GLOBALS['fd'],$meeting,PromiseQuitMeetingSuccess);
                     }
 
                 }

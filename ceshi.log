@@ -1,4 +1,10 @@
 
+set Controller => Controller\connectController 
+dispatch 
+has disConnected fd = 1,
+[2018-05-15 19:48:51 #5466.2]	NOTICE	Server is shutdown now.
+
+
 has connected fd=>1,
 array(2) {
   ["path"]=>
@@ -9,24 +15,13 @@ array(2) {
     string(5) "uuid1"
   }
 }
-set Controller => Controller\indexController 
-dispatch 
-Receive 执行结束 
-set Controller => Controller\connectController 
-dispatch 
-has disConnected fd = 1,
-has connected fd=>2,
-array(2) {
-  ["path"]=>
-  string(10) "index/init"
-  ["params"]=>
-  array(1) {
-    ["uuid"]=>
-    string(5) "uuid1"
-  }
-}
-dispatch 
-Receive 执行结束 
+PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /www/web/ZHY/swooleSocket/Controller/indexController.php on line 23
+syntax error, unexpected 'if' (T_IF) (/www/web/ZHY/swooleSocket/Controller/indexController.php:23)
+Stack trace:
+#0 unknown(0): handleFatal()
+
+[2018-05-15 19:49:03 $5559.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+
 array(2) {
   ["path"]=>
   string(14) "meeting/create"
@@ -42,18 +37,11 @@ array(2) {
 }
 set Controller => Controller\meetingController 
 dispatch 
-Receive 执行结束 
-array(2) {
-  ["path"]=>
-  string(16) "meeting/dissolve"
-  ["params"]=>
-  array(2) {
-    ["meeting_id"]=>
-    string(12) "test-meeting"
-    ["uuid"]=>
-    string(5) "uuid1"
-  }
-}
-dispatch 
-Receive 执行结束 
-[2018-05-14 10:55:57 #30981.2]	NOTICE	Server is shutdown now.
+PHP Fatal error:  Class 'Swoole\Coroutine\Redis' not found in /www/web/ZHY/swooleSocket/core/Redis.php on line 35
+Class 'Swoole\Coroutine\Redis' not found (/www/web/ZHY/swooleSocket/core/Redis.php:35)
+Stack trace:
+#0 unknown(0): handleFatal()
+
+[2018-05-15 19:52:42 *5565.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Class 'Swoole\Coroutine\Redis' not found in /www/web/ZHY/swooleSocket/core/Redis.php on line 35.
+[2018-05-15 19:52:42 $5559.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+

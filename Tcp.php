@@ -55,7 +55,7 @@ class Server
 
     public function OnReceive($serv, $fd, $from_id, $data)
     {
-        try {
+            register_shutdown_function("handleFatal",$serv,$fd);
             $data = unserialize(trim($data));
             var_dump($data);
 
@@ -64,11 +64,6 @@ class Server
                 $serv->index->run($data['path'], $data['params']);
             }
             echo "Receive 执行结束 \n";
-
-        } catch (Exception $e) {
-            echo "报错： " . $e->getMessage() . "\n";
-            $serv->send($fd,serialize(['code'=>-1001,'message'=>$e->getMessage(),'data'=>[]]));
-        }
 
     }
 
@@ -86,6 +81,7 @@ class Server
 
     public function onWorkerStart($serv, $work_id)
     {
+
         include "run.php";
         $serv->index = new  \swooleSocket\Run();
 
@@ -107,6 +103,7 @@ class Server
         $GLOBALS['fd'] = $fd;
         //$GLOBALS['from_id'] = $from_id;
     }
+
 
 
 }

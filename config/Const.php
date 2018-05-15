@@ -19,6 +19,7 @@ const SuccessMessage = 1001;//success
 const FatalError = -1001;//server error
 const ParamsRequiredError = -1002;//params is required
 
+const MeetingCreateSuccess = 2001;
 const NoMeetingError = -2001;//no meeting
 const NotManagerError = -2002;//非主持人
 const QuitMeetingSuccess = 2003;
