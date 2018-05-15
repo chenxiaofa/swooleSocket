@@ -13,7 +13,7 @@ class Server
         if (self::fdExists($fd)){
             $GLOBALS['serv']->send($fd!==0?$fd:$GLOBALS['fd'],$data);
         }else{
-            echo "fd is not found ! \n";
+            echo "fd=>{$fd} is not found ! \n";
         }
 
     }
