@@ -132,7 +132,13 @@ class meetingController
                         Server::successSend($redis->hget(OnlineDeviceToFd,$uuid),$meeting,FlushMeetingMembersSuccess);
                     }
                     Server::successSend($disFd,[],QuitMeetingSuccess);
-                    Server::successSend($GLOBALS['fd'],[],PromiseQuitMeetingSuccess);
+
+                    if(isset($params['is_disconnect'])&& $params['is_disconnect']==true){//兼容断线
+                        Server::successSend($redis->hget(OnlineDeviceToFd,$meeting['manager']),[],PromiseQuitMeetingSuccess);
+                    }else{
+                        Server::successSend($GLOBALS['fd'],[],PromiseQuitMeetingSuccess);
+                    }
+
                 }
 
             }else{

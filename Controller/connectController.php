@@ -47,7 +47,7 @@ class connectController
                         (new meetingController())->dissolveAction(['uuid'=>$device['uuid'],'meeting_id'=>$device['meeting_id']]);
                     }
                     if ($meeting && in_array($device['uuid'],array_keys($meeting['members']))){//退出会议
-                        (new meetingController())->quitAction(['uuid'=>$meeting['manager'],'dis_uuid'=>$device['uuid'],'meeting_id'=>$device['meeting_id']]);
+                        (new meetingController())->quitAction(['uuid'=>$meeting['manager'],'dis_uuid'=>$device['uuid'],'meeting_id'=>$device['meeting_id'],'is_disconnect'=>true]);
                     }
 
 
