@@ -12,7 +12,9 @@
 
 $client = new swoole_client(SWOOLE_SOCK_TCP, SWOOLE_SOCK_ASYNC);
 
-$uuid = '';
+$uuid = 'default-uuid';
+
+
 
 $client->on("connect", function($cli)use(&$uuid) {
     echo "链接成功！！！\r\n";
