@@ -56,7 +56,7 @@ class meetingController
 
 
     private function createMeetingId(){
-        $meeting_id = mt_rand(1000000,999999);
+        $meeting_id = mt_rand(100000,999999);
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         if($redis->hexists(OnlineMeeting,$meeting_id)){
