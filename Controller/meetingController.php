@@ -21,28 +21,49 @@ class meetingController
     public function createAction($params)
     {
 
-        if (count(array_diff(['name', 'meeting_id', 'uuid'], array_keys($params))) > 0) {
+        if (count(array_diff(['name', 'monitor', 'uuid'], array_keys($params))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
         }
 
-        $meeting = [
-            'name' => $params['name'],
-            'manager' => $params['uuid'],
-            'meeting_id' => $params['meeting_id'],
-            'members' => []
-        ];
+        $meeting_id = $this->createMeetingId();
 
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
 
-        $redis->hset(OnlineMeeting, $params['meeting_id'], serialize($meeting));
+
+
         $managerInfo = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
         $managerInfo = unserialize($managerInfo);
         $managerInfo['meeting_id'] = $params['meeting_id'];
+
+        $meeting = [
+            'meeting_id' => $meeting_id,
+            'name' => $params['name'],
+            'manager' => $params['uuid'],
+            'manager_info'=> $managerInfo,
+            'monitor'=>$params['monitor'],
+            'create_time'=>time(),
+            'members' => []
+        ];
+
+        $redis->hset(OnlineMeeting, $meeting_id, serialize($meeting));
         $redis->hset(OnlineFDToDevice, $GLOBALS['fd'], serialize($managerInfo));
 
+
         $redisHandel->put($redis);
-        Server::successSend($GLOBALS['fd'], [], MeetingCreateSuccess);
+        Server::successSend($GLOBALS['fd'], ['meeting_id'=>$meeting_id], MeetingCreateSuccess);
+    }
+
+
+    private function createMeetingId(){
+        $meeting_id = mt_rand(1000000,999999);
+        $redisHandel = Redis::getInstance();
+        $redis = $redisHandel->get();
+        if($redis->hexists(OnlineMeeting,$meeting_id)){
+            return $this->createMeetingId();
+        }
+        $redisHandel->put($redis);
+        return $meeting_id;
     }
 
     /**

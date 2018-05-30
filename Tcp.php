@@ -56,11 +56,10 @@ class Server
     public function OnReceive($serv, $fd, $from_id, $data)
     {
             register_shutdown_function("handleFatal",$serv,$fd);
-            $data = unserialize(trim($data));
+            $data = json_decode(trim($data),true);
             var_dump($data);
-
-            $this->copyGlobal($serv, $fd);
             if (isset($data['path']) && $data['params']) {
+                $this->copyGlobal($serv, $fd);
                 $serv->index->run($data['path'], $data['params']);
             }
             echo "Receive 执行结束 \n";
@@ -71,7 +70,6 @@ class Server
     {
         echo "onTask>>>  TaskId:$task_id, FromId:$from_id,Data:$data \n";
         //调度任务，操作数据
-
     }
 
     public function onFinish($serv, $task_id, $data)

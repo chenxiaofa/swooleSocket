@@ -19,7 +19,7 @@ class indexController
 
     public function initAction($params)
     {
-        if (count(array_diff(['uuid'],array_keys($params)))>0){
+        if (count(array_diff(['uuid',"ip_addr","username"],array_keys($params)))>0){
             Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError);
         }
 
