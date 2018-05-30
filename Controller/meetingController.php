@@ -34,7 +34,7 @@ class meetingController
 
         $managerInfo = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
         $managerInfo = unserialize($managerInfo);
-        $managerInfo['meeting_id'] = $params['meeting_id'];
+        $managerInfo['meeting_id'] = $meeting_id;
 
         $meeting = [
             'meeting_id' => $meeting_id,
