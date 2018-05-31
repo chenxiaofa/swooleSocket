@@ -72,7 +72,7 @@ class meetingController
      */
     public function joinAction($params)
     {
-        if (count(array_diff(['meeting_id', 'uuid'], array_keys($params))) > 0) {
+        if (count(array_diff(['meeting_id', 'uuid','username'], array_keys($params))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
         }
 
@@ -82,15 +82,20 @@ class meetingController
         $meeting = $redis->hget(OnlineMeeting, $params['meeting_id']);
 
         if ($meeting) {//会议记录是否存在
-            $meeting = unserialize($meeting);
 
+            //修改成员信息
             $member = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
             $member = unserialize($member);
             $member['meeting_id'] = $params['meeting_id'];
+            $member['username'] = $params['username'];
             $redis->hset(OnlineFDToDevice, $GLOBALS['fd'], serialize($member));
-            $meeting['members'][$params['uuid']] = $member;
 
+            //修改会议信息
+            $meeting = unserialize($meeting);
+            $meeting['members'][$params['uuid']] = $member;
             $redis->hset(OnlineMeeting, $params['meeting_id'], serialize($meeting));
+
+            //发送通知
             Server::successSend($redis->hget(OnlineDeviceToFd, $meeting['manager']), $meeting, FlushMeetingMembersSuccess);//发送通知给主持人
             foreach ($meeting['members'] as $uuid => $info) {
                 Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $meeting, FlushMeetingMembersSuccess);//发送通知给专家
@@ -145,7 +150,10 @@ class meetingController
                 //$disFd = array_search($params['dis_uuid'],$meeting['members']);
                 $disMember = @$meeting['members'][$params['dis_uuid']];
                 if ($disMember) {
+                    //修改链接用户的信息，删除会议信息
                     $disMember['meeting_id'] = null;
+                    $disMember['username'] = null;
+
                     $disFd = $redis->hget(OnlineDeviceToFd, $params['dis_uuid']);
                     $redis->hset(OnlineFDToDevice, $disFd, serialize($disMember));
                     unset($meeting['members'][$params['dis_uuid']]);

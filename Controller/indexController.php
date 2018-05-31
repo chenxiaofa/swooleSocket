@@ -19,12 +19,13 @@ class indexController
 
     public function initAction($params)
     {
-        if (count(array_diff(['uuid',"ip_addr","username"],array_keys($params)))>0){
+        if (count(array_diff(['uuid',"ip_addr"],array_keys($params)))>0){
             Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError);
         }
 
         $params['created_at'] = time();
         $params['meeting_id'] = null;
+        $params['username'] = null;
 
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
