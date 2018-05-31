@@ -25,5 +25,5 @@ const NotManagerError = -2002;//非主持人
 const QuitMeetingSuccess = 2003;
 const PromiseQuitMeetingSuccess=2004;
 const DissolveMeetingSuccess=2005;
-const FlushMeetingMembersSuccess = 2001;//创建会议成功
+const FlushMeetingMembersSuccess = 4001;//刷新用户列表
 const RepeatMessageSuccess = 3001;//作为转发服务器，发送消息
