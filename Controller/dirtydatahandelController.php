@@ -84,7 +84,8 @@ class dirtydatahandelController
                         }
                         //更新meeting
                         //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
-                        foreach (array_push($meeting['members'],$meeting['manager_info']) as $member){
+                        array_push($meeting['members'],$meeting['manager_info']);
+                        foreach ($meeting['members'] as $member){
                             echo "dirty data send to ".$member['uuid'];
                             Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ConnectLosted);
                         }
