@@ -100,6 +100,7 @@ class meetingController
             foreach ($meeting['members'] as $uuid => $info) {
                 if ($uuid == $member['uuid']){
                     Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $meeting, JoinMeetingSuccess);//发送通知给专家
+                    continue;
                 }
                 Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $meeting, FlushMeetingMembersSuccess);//发送通知给专家
             }

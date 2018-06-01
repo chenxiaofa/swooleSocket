@@ -12,7 +12,7 @@ namespace Controller;
 use core\Redis;
 use Ext\Server;
 
-class dirtyDataHandelController
+class dirtydatahandelController
 {
     public function timingDelAction()
     {//每天删除一次脏数据
@@ -40,7 +40,7 @@ class dirtyDataHandelController
     }
 
 
-    public function disconnectAndNotify(){
+    public function disconnectandnotifyAction(){
         $connList = Server::getConnections();
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
