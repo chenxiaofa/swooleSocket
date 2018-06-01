@@ -61,7 +61,7 @@ class dirtydatahandelController
             }else{//判断会议之后删除
                 $meeting = $redis->hget(OnlineMeeting,$device['meeting_id']);
                 $meeting = $meeting?unserialize($meeting):null;
-                if($device['dis_connect']!==0 && $device['dis_connect']<time()-5*3600){//断线超过5min，直接删除掉
+                if($device['dis_connect']!==0 && $device['dis_connect']<time()-2*60){//断线超过5min，直接删除掉
                         if ($meeting && $meeting['manager']==$device['uuid']){//解散会议
                             (new meetingController())->dissolveAction(['uuid'=>$device['uuid'],'meeting_id'=>$device['meeting_id']]);
                         }
@@ -93,7 +93,6 @@ class dirtydatahandelController
                     }
                     $device['dis_connect']=time();
                     $redis->hset(OnlineFDToDevice,$fd,serialize($device));
-
                 }
 
             }
