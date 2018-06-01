@@ -38,4 +38,65 @@ class dirtyDataHandelController
 
         $redisHandel->put($redis);
     }
+
+
+    public function disconnectAndNotify(){
+        $connList = Server::getConnections();
+        $redisHandel = Redis::getInstance();
+        $redis = $redisHandel->get();
+        //单独删除fd-》device的redis列表
+        $fdDevices = $redis->hkeys(OnlineFDToDevice);
+        $fdDevices = count($fdDevices)>0?$fdDevices:[];
+        $delFdDevices = array_diff($fdDevices,$connList);
+        foreach ($delFdDevices as $fd){
+            $device = $redis->hget(OnlineFDToDevice,$fd);
+            $device = $device?unserialize($device):[];
+
+            //判断是否存在meeting，不存在旧直接删除了
+            if(!@$device['meeting_id']){
+                //直接删除uuid=>fd
+                $deviceFd = $redis->hget(OnlineDeviceToFd,$device['uuid']);
+                $deviceFd==$fd && $redis->hdel(OnlineDeviceToFd,$device['uuid']);
+                $redis->hdel(OnlineFDToDevice,$fd);
+            }else{//判断会议之后删除
+                $meeting = $redis->hget(OnlineMeeting,$device['meeting_id']);
+                $meeting = $meeting?unserialize($meeting):null;
+                if(isset($device['dis_connect']) && $device[$fd]['disconnect']>time()-5*3600){//断线超过5min，直接删除掉
+                        if ($meeting && $meeting['manager']==$device['uuid']){//解散会议
+                            (new meetingController())->dissolveAction(['uuid'=>$device['uuid'],'meeting_id'=>$device['meeting_id']]);
+                        }
+                        if ($meeting && in_array($device['uuid'],array_keys($meeting['members']))){//退出会议
+                            (new meetingController())->quitAction(['uuid'=>$meeting['manager'],'dis_uuid'=>$device['uuid'],'meeting_id'=>$device['meeting_id'],'is_disconnect'=>true]);
+                        }
+                    //直接删除uuid=>fd
+                    $deviceFd = $redis->hget(OnlineDeviceToFd,$device['uuid']);
+                    if ($deviceFd == $fd) $redis->hdel(OnlineDeviceToFd,$device['uuid']);
+
+                    $redis->hdel(OnlineFDToDevice,$fd);
+
+                }elseif(!isset($device['dis_connect'])){//设置断线重连的时间
+                    //断线通知,重连
+                    if ($meeting){
+                        if ($device['uuid']==$meeting['manager']){
+                            $meeting['manager_info']['dis_connect'] = time();
+                        }else{
+                            isset($meeting['members'][$device['uuid']]) && $meeting['members'][$device['uuid']]['dis_connect'] = time();
+                        }
+                        //更新meeting
+                        //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
+                        foreach (array_push($meeting['members'],$meeting['manager_info']) as $member){
+                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ConnectLosted);
+                        }
+
+                    }
+                    $device['dis_connect']=time();
+                    $redis->hset(OnlineFDToDevice,$fd,serialize($device));
+
+                }
+
+            }
+        }
+        $redisHandel->put($redis);
+    }
+
 }
