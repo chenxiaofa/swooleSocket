@@ -27,7 +27,8 @@ class connectController
                 $deviceInfo = unserialize($deviceInfo);
                 $deviceInfo['dis_connect']=0;
                 $redis->hset(OnlineDeviceToFd,$params['uuid'],$GLOBALS['fd']);
-                $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],$deviceInfo);
+                $redis->hdel(OnlineFDToDevice,$oldFd);
+                $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($deviceInfo));
                 $meeting = $redis->hget(OnlineMeeting,$deviceInfo['meeting_id']);
                 $meeting = $meeting?unserialize($meeting):[];
                 if ($meeting){
