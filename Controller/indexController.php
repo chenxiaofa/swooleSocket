@@ -26,6 +26,7 @@ class indexController
         $params['created_at'] = time();
         $params['meeting_id'] = null;
         $params['username'] = null;
+        $params['dis_connect'] = 0;
 
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();

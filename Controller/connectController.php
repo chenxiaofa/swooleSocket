@@ -25,17 +25,17 @@ class connectController
             $deviceInfo = $redis->hget(OnlineFDToDevice,$oldFd);
             if ($oldFd && $deviceInfo){//重连信息依然存在
                 $deviceInfo = unserialize($deviceInfo);
-                if(isset($deviceInfo['dis_connect']))  unset($deviceInfo['dis_connect']);
+                $deviceInfo['dis_connect']=0;
                 $redis->hset(OnlineDeviceToFd,$params['uuid'],$GLOBALS['fd']);
-            $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],$deviceInfo);
-            $meeting = $redis->hget(OnlineMeeting,$deviceInfo['meeting_id']);
-            $meeting = $meeting?unserialize($meeting):[];
-            if ($meeting){
-                //重连成功，通知
-                foreach (array_push($meeting['members'],$meeting['manager_info']) as $member){
-                    Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ReconnectSuccess);
+                $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],$deviceInfo);
+                $meeting = $redis->hget(OnlineMeeting,$deviceInfo['meeting_id']);
+                $meeting = $meeting?unserialize($meeting):[];
+                if ($meeting){
+                    //重连成功，通知
+                    foreach (array_push($meeting['members'],$meeting['manager_info']) as $member){
+                        Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ReconnectSuccess);
+                    }
                 }
-            }
             //重连要更新一下通知
             //Server::successSend($GLOBALS['fd'],$meeting,FlushMeetingMembersSuccess);
             }else{//重连信息不存在，返回失败
