@@ -80,7 +80,6 @@ class Server
 
     public function onWorkerStart($serv, $work_id)
     {
-
         include "run.php";
         $serv->index = new  \swooleSocket\Run();
 
@@ -89,7 +88,7 @@ class Server
             $serv->tick(60000, function (
                 $timer_id
             ) use ($serv) {
-              //  $serv->index->run('dirtyDataHandel/timingDel', []);
+                $serv->index->run('dirtyDataHandel/disconnectAndNotify', []);
             });
         }
 

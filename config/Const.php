@@ -28,3 +28,6 @@ const DissolveMeetingSuccess=2005;
 const RepeatMessageSuccess = 3001;//作为转发服务器，发送消息
 const FlushMeetingMembersSuccess = 4001;//刷新用户列表
 const JoinMeetingSuccess=5001;
+const ReconnectSuccess=6001;
+const ReconnectFailed=-6001;
+const ConnectLosted = -7001;

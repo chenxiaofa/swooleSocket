@@ -183,7 +183,6 @@ class meetingController
 
         $redisHandel->put($redis);
 
-
     }
 
 
