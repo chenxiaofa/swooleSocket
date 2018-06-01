@@ -33,7 +33,8 @@ class connectController
                 $meeting = $meeting?unserialize($meeting):[];
                 if ($meeting){
                     //重连成功，通知
-                    foreach (array_push($meeting['members'],$meeting['manager_info']) as $member){
+
+                    foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
                         Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ReconnectSuccess);
                     }
                 }
@@ -71,8 +72,7 @@ class connectController
                         }
                         //更新meeting
                         //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
-                        array_push($meeting['members'],$meeting['manager_info']);
-                        foreach ($meeting['members'] as $member){
+                        foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
                             echo "disconnect send to ".$member['uuid'];
                             Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ConnectLosted);
                         }
