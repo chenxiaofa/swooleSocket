@@ -88,7 +88,6 @@ class dirtydatahandelController
                             echo "dirty data send to ".$member['uuid'];
                             Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ConnectLosted);
                         }
-
                     }
                     $device['dis_connect']=time();
                     $redis->hset(OnlineFDToDevice,$fd,serialize($device));
