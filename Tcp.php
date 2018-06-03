@@ -85,7 +85,7 @@ class Server
 
 
         if ($work_id == 0) {
-            $serv->tick(10000, function (
+            $serv->tick(30000, function (
                 $timer_id
             ) use ($serv) {
                 echo "定时任务：".time()."\n";

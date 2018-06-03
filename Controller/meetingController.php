@@ -34,6 +34,17 @@ class meetingController
 
         $managerInfo = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
         $managerInfo = unserialize($managerInfo);
+        if ($managerInfo['meeting_id']){//存在meeting_id,则解散之前参加的会议或者主持的会议
+            $meeting = $redis->hget(OnlineMeeting,$managerInfo['meeting_id']);
+            $meeting = $meeting?unserialize($meeting):[];
+            if ($meeting){
+                if ($meeting['manager']==$managerInfo['uuid']){
+                    $this->dissolveAction(['meeting_id'=>$managerInfo['meeting_id'],'uuid'=>$managerInfo['uuid']]);
+                }else{
+                    $this->quitAction(['meeting_id'=>$managerInfo['meeting_id'],'dis_uuid'=>$managerInfo['uuid'],'uuid'=>$meeting['manager']]);
+                }
+            }
+        }
         $managerInfo['meeting_id'] = $meeting_id;
 
         $meeting = [
@@ -82,10 +93,22 @@ class meetingController
         $meeting = $redis->hget(OnlineMeeting, $params['meeting_id']);
 
         if ($meeting) {//会议记录是否存在
-
-            //修改成员信息
             $member = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
             $member = unserialize($member);
+            //检测成员信息是否还存在其他会议中，
+            if ($member['meeting_id']){
+                $oldMeeting = $redis->hget(OnlineMeeting,$member['meeting_id']);
+                $oldMeeting = $oldMeeting?unserialize($oldMeeting):[];
+                if ($oldMeeting){
+                    if ($oldMeeting['manager']==$member['uuid']){
+                        $this->dissolveAction(['meeting_id'=>$member['meeting_id'],'uuid'=>$member['uuid']]);
+                    }else{
+                        $this->quitAction(['meeting_id'=>$member['meeting_id'],'dis_uuid'=>$member['uuid'],'uuid'=>$oldMeeting['manager']]);
+                    }
+                }
+            }
+
+            //修改成员信息
             $member['meeting_id'] = $params['meeting_id'];
             $member['username'] = $params['username'];
             $redis->hset(OnlineFDToDevice, $GLOBALS['fd'], serialize($member));

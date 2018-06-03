@@ -33,7 +33,6 @@ class connectController
                 $meeting = $meeting?unserialize($meeting):[];
                 if ($meeting){
                     //重连成功，通知
-
                     foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
                         Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ReconnectSuccess);
                     }
