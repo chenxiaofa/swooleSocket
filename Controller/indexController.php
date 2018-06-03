@@ -20,7 +20,7 @@ class indexController
     public function initAction($params)
     {
         if (count(array_diff(['uuid',"ip_addr"],array_keys($params)))>0){
-            Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError);
+            Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError); return;
         }
 
         $params['created_at'] = time();

@@ -22,7 +22,7 @@ class meetingController
     {
 
         if (count(array_diff(['name', 'monitor', 'uuid'], array_keys($params))) > 0) {
-            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
+            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
 
         $meeting_id = $this->createMeetingId();
@@ -84,7 +84,7 @@ class meetingController
     public function joinAction($params)
     {
         if (count(array_diff(['meeting_id', 'uuid','username'], array_keys($params))) > 0) {
-            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
+            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
 
         $redisHandel = Redis::getInstance();
@@ -119,13 +119,13 @@ class meetingController
             $redis->hset(OnlineMeeting, $params['meeting_id'], serialize($meeting));
 
             //发送通知
-            Server::successSend($redis->hget(OnlineDeviceToFd, $meeting['manager']), $meeting, FlushMeetingMembersSuccess);//发送通知给主持人
+            Server::successSend($redis->hget(OnlineDeviceToFd, $meeting['manager']), $member, FlushMeetingMembersJoin);//发送通知给主持人
             foreach ($meeting['members'] as $uuid => $info) {
                 if ($uuid == $member['uuid']){
                     Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $meeting, JoinMeetingSuccess);//发送通知给专家
                     continue;
                 }
-                Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $meeting, FlushMeetingMembersSuccess);//发送通知给专家
+                Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $member, FlushMeetingMembersJoin);//发送通知给专家
             }
 
         } else {
@@ -143,7 +143,7 @@ class meetingController
     public function repeatAction($params)
     {
         if (count(array_diff(['meeting_id', 'uuid', 'to_uuid', 'message'], array_keys($params))) > 0) {
-            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
+            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
@@ -165,7 +165,7 @@ class meetingController
     public function quitAction($params)
     {
         if (count(array_diff(['meeting_id', 'uuid', 'dis_uuid'], array_keys($params))) > 0) {
-            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
+            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
 
         $redisHandel = Redis::getInstance();
@@ -177,6 +177,7 @@ class meetingController
                 //$disFd = array_search($params['dis_uuid'],$meeting['members']);
                 $disMember = @$meeting['members'][$params['dis_uuid']];
                 if ($disMember) {
+                    $memberForMessage = $disMember;
                     //修改链接用户的信息，删除会议信息
                     $disMember['meeting_id'] = null;
                     $disMember['username'] = null;
@@ -186,14 +187,14 @@ class meetingController
                     unset($meeting['members'][$params['dis_uuid']]);
                     $redis->hset(OnlineMeeting, $params['meeting_id'], serialize($meeting));
                     foreach ($meeting['members'] as $uuid => $info) {
-                        Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $meeting, FlushMeetingMembersSuccess);
+                        Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $memberForMessage, FlushMeetingMembersQuit);
                     }
                     Server::successSend($disFd, [], QuitMeetingSuccess);
 
                     if (isset($params['is_disconnect']) && $params['is_disconnect'] == true) {//兼容断线
-                        Server::successSend($redis->hget(OnlineDeviceToFd, $meeting['manager']), $meeting, PromiseQuitMeetingSuccess);
+                        Server::successSend($redis->hget(OnlineDeviceToFd, $meeting['manager']), $memberForMessage, PromiseQuitMeetingSuccess);
                     } else {
-                        Server::successSend($GLOBALS['fd'], $meeting, PromiseQuitMeetingSuccess);
+                        Server::successSend($GLOBALS['fd'], $memberForMessage, PromiseQuitMeetingSuccess);
                     }
 
                 }
@@ -213,7 +214,7 @@ class meetingController
     public function dissolveAction($params)
     {
         if (count(array_diff(['meeting_id', 'uuid'], array_keys($params))) > 0) {
-            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
+            Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
 
         $redisHandel = Redis::getInstance();

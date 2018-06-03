@@ -43,7 +43,9 @@ class dirtydatahandelController
     public function disconnectandnotifyAction(){
         $connList = Server::getConnections();
         $redisHandel = Redis::getInstance();
+        echo "cccc";
         $redis = $redisHandel->get();
+        echo "dddd\n";
         //单独删除fd-》device的redis列表
         $fdDevices = $redis->hkeys(OnlineFDToDevice);
         $fdDevices = count($fdDevices)>0?$fdDevices:[];
@@ -86,7 +88,7 @@ class dirtydatahandelController
                         //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
                         foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
                             echo "dirty data send to ".$member['uuid'];
-                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ConnectLosted);
+                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$device,FlushMeetingMembersLostConnect);
                         }
                     }
                     $device['dis_connect']=time();
