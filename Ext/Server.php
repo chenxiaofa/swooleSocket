@@ -25,7 +25,7 @@ class Server
 
     public static function failedSend($fd,$data=[],$code=FatalError,$message='failed'){
         $message = ['code'=>$code,'message'=>$message,'data'=>$data];
-        self::send(serialize($message),$fd);
+        self::send(json_encode($message),$fd);
     }
 
     public static function getConnections(){
