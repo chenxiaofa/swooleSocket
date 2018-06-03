@@ -83,7 +83,6 @@ class Server
         include "run.php";
         $serv->index = new  \swooleSocket\Run();
 
-
         if ($work_id == 0) {
             $serv->tick(30000, function (
                 $timer_id

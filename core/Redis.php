@@ -31,11 +31,9 @@ class Redis
         if (count($this->pool)>0){
             return $this->pool->pop();
         }
-
         $redis = new \Swoole\Coroutine\Redis();
         $redisConfig = env('redis');
         $connect = $redis->connect($redisConfig['host'],$redisConfig['port']);
-
         return $redis;
     }
 

@@ -17,7 +17,7 @@ class connectController
         //异常断开，重新链接，替换fd即可
         public function reconnectAction($params){
             if (count(array_diff(['uuid'],array_keys($params)))>0){
-                Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError);
+                Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError); return ;
             }
             $redisHandel = Redis::getInstance();
             $redis = $redisHandel->get();
@@ -31,10 +31,16 @@ class connectController
                 $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($deviceInfo));
                 $meeting = $redis->hget(OnlineMeeting,$deviceInfo['meeting_id']);
                 $meeting = $meeting?unserialize($meeting):[];
-                if ($meeting){
+                if ($meeting && isset($meeting['members'][$deviceInfo['uuid']])){
                     //重连成功，通知
+                    $meeting['members'][$deviceInfo['uuid']]=$deviceInfo;
+                    $redis->hset(OnlineMeeting,$deviceInfo['meeting_id'],serialize($meeting));
                     foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
-                        Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ReconnectSuccess);
+                        if ($member['uuid']==$deviceInfo['uuid']){
+                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ReconnectSuccess);
+                        }else{
+                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$deviceInfo,FlushMeetingMembersReConnect);
+                        }
                     }
                 }
             //重连要更新一下通知
@@ -51,7 +57,7 @@ class connectController
             $redisHandel = Redis::getInstance();
             $redis = $redisHandel->get();
             $device = $redis->hget(OnlineFDToDevice,$params['fd']);
-            if ($device) $device = unserialize($device);
+            if ($device) $device = unserialize($device); else return ;
             $delFd = $redis->hget(OnlineDeviceToFd,$device['uuid']);
             if ($delFd==$params['fd']){
                 //判断是否存在会议，如果存在会议，则给定一个异常断开的状态
@@ -73,7 +79,7 @@ class connectController
                         //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
                         foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
                             echo "disconnect send to ".$member['uuid'];
-                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$meeting,ConnectLosted);
+                            Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$device,FlushMeetingMembersLostConnect);
                         }
 
                     }
