@@ -60,14 +60,9 @@ class connectController
             $device = $redis->hget(OnlineFDToDevice,$params['fd']);
             if ($device) $device = unserialize($device); else return ;
             $delFd = $redis->hget(OnlineDeviceToFd,$device['uuid']);
-            /**
-             * linshi
-             */
-            $redis->hdel(OnlineFDToDevice,$params['fd']);
-            $redis->hdel(OnlineDeviceToFd,$device['uuid']);
-            /**
-             * jieshu
-             */
+
+
+
 
 
             if ($delFd==$params['fd']){
