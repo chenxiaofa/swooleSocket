@@ -43,9 +43,7 @@ class dirtydatahandelController
     public function disconnectandnotifyAction(){
         $connList = Server::getConnections();
         $redisHandel = Redis::getInstance();
-        echo "cccc";
         $redis = $redisHandel->get();
-        echo "dddd\n";
         //单独删除fd-》device的redis列表
         $fdDevices = $redis->hkeys(OnlineFDToDevice);
         $fdDevices = count($fdDevices)>0?$fdDevices:[];

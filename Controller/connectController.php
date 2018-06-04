@@ -56,9 +56,20 @@ class connectController
             // fd,
             $redisHandel = Redis::getInstance();
             $redis = $redisHandel->get();
+
             $device = $redis->hget(OnlineFDToDevice,$params['fd']);
             if ($device) $device = unserialize($device); else return ;
             $delFd = $redis->hget(OnlineDeviceToFd,$device['uuid']);
+            /**
+             * linshi
+             */
+            $redis->hdel(OnlineFDToDevice,$params['fd']);
+            $redis->hdel(OnlineDeviceToFd,$device['uuid']);
+            /**
+             * jieshu
+             */
+
+
             if ($delFd==$params['fd']){
                 //判断是否存在会议，如果存在会议，则给定一个异常断开的状态
                 if(!@$device['meeting_id']){
