@@ -21,7 +21,7 @@ class meetingController
     public function createAction($params)
     {
 
-        if (count(array_diff(['name', 'monitor', 'uuid'], array_keys($params))) > 0) {
+        if (count(array_diff(['name', 'monitor', 'uuid','username'], array_keys($params))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
 
@@ -29,8 +29,6 @@ class meetingController
 
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
-
-
 
         $managerInfo = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
         $managerInfo = unserialize($managerInfo);
@@ -46,7 +44,7 @@ class meetingController
             }
         }
         $managerInfo['meeting_id'] = $meeting_id;
-
+        $managerInfo['username'] = $params['username'];
         $meeting = [
             'meeting_id' => $meeting_id,
             'name' => $params['name'],
