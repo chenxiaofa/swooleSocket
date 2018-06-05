@@ -46,7 +46,7 @@ class dirtydatahandelController
         $redis = $redisHandel->get();
         //单独删除fd-》device的redis列表
         $fdDevices = $redis->hkeys(OnlineFDToDevice);
-        $fdDevices = count($fdDevices)>0?$fdDevices:[];
+        $fdDevices = $fdDevices?:[];
         $delFdDevices = array_diff($fdDevices,$connList);
         foreach ($delFdDevices as $fd){
             $device = $redis->hget(OnlineFDToDevice,$fd);
