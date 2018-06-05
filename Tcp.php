@@ -56,9 +56,8 @@ class Server
     public function OnReceive($serv, $fd, $from_id, $data)
     {
             register_shutdown_function("handleFatal",$serv,$fd);
-            var_dump($data);
-	    $data = json_decode(trim($data),true);
-            var_dump($data);
+            $data = json_decode(trim($data),true);
+            //var_dump($data);
             if (isset($data['path']) && $data['params']) {
                 $this->copyGlobal($serv, $fd);
                 $serv->index->run($data['path'], $data['params']);
