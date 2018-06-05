@@ -61,10 +61,6 @@ class connectController
             if ($device) $device = unserialize($device); else return ;
             $delFd = $redis->hget(OnlineDeviceToFd,$device['uuid']);
 
-
-
-
-
             if ($delFd==$params['fd']){
                 //判断是否存在会议，如果存在会议，则给定一个异常断开的状态
                 if(!@$device['meeting_id']){
