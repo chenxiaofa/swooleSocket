@@ -65,7 +65,7 @@ class meetingController
 
 
     private function createMeetingId(){
-        $meeting_id = mt_rand(100000,999999);
+        $meeting_id = mt_rand(10000,99999);
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         if($redis->hexists(OnlineMeeting,$meeting_id)){
@@ -107,7 +107,7 @@ class meetingController
             }
 
             //修改成员信息
-            $member['meeting_id'] = $params['meeting_id'];
+            $member['meeting_id'] = intval($params['meeting_id']);
             $member['username'] = $params['username'];
             $redis->hset(OnlineFDToDevice, $GLOBALS['fd'], serialize($member));
 
