@@ -35,6 +35,22 @@ class indexController
 
         $redis->multi();
         if($oldDeviceFd){//如果存在旧设备，则删除旧的fd基础信息
+            //如果存在olddevice，則需要先退出會議
+            $oldDevice = $redis->hget(OnlineMeeting,$oldDeviceFd);
+            $oldDevice && $oldDevice = unserialize($oldDevice);
+            if ($oldDevice['meeting_id']){
+                $meeting = $redis->hget(OnlineMeeting,$oldDevice['meeting_id']);
+                $meeting && $meeting = unserialize($meeting);
+
+                if ($meeting && $meeting['manager']==$oldDevice['uuid']){//解散会议
+                    (new meetingController())->dissolveAction(['uuid'=>$oldDevice['uuid'],'meeting_id'=>$oldDevice['meeting_id']]);
+                }
+                if ($meeting && in_array($oldDevice['uuid'],array_keys($meeting['members']))){//退出会议
+                    (new meetingController())->quitAction(['uuid'=>$meeting['manager'],'dis_uuid'=>$oldDevice['uuid'],'meeting_id'=>$oldDevice['meeting_id'],'is_disconnect'=>true]);
+                }
+
+            }
+
             $redis->hdel(OnlineFDToDevice,$oldDeviceFd);
         }
         $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($params));

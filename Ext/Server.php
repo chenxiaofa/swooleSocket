@@ -10,8 +10,9 @@ namespace Ext;
 class Server
 {
     public static function send($data,$fd=0){
+        echo "send Data:{$data} \n";
+
         if (self::fdExists($fd)){
-            echo "send Data:{$data} \n";
             $GLOBALS['serv']->send($fd!==0?$fd:$GLOBALS['fd'],$data);
         }else{
             echo "fd=>{$fd} is not found ! \n";

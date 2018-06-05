@@ -80,7 +80,7 @@ class connectController
                         //更新meeting
                         //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
                         foreach (array_merge($meeting['members'],[$meeting['manager_info']]) as $member){
-                            echo "disconnect send to ".$member['uuid'];
+                            echo "disconnect send to ".$member['uuid']."\n";
                             Server::successSend($redis->hget(OnlineDeviceToFd,$member['uuid']),$device,FlushMeetingMembersLostConnect);
                         }
 
