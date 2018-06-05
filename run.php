@@ -36,7 +36,7 @@ class Run{
             echo "set Controller => $controller \n";
             $this->dispatch[$controller] = new $controller();
         }
-        echo "dispatch \n";
+        echo "dispatch {$controller}->{$action} prrams:".json_encode($params)." \n";
         $this->dispatch[$controller]->$action($params);
 
     }
