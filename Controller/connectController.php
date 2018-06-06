@@ -72,10 +72,11 @@ class connectController
                     $meeting = $redis->hget(OnlineMeeting,$device['meeting_id']);
                     $meeting = $meeting?unserialize($meeting):null;
                     if ($meeting){
+                        $device['dis_connect']=time();
                         if ($device['uuid']==$meeting['manager']){
-                            $meeting['manager_info']['dis_connect'] = time();
+                            $meeting['manager_info'] = $device;
                         }else{
-                            isset($meeting['members'][$device['uuid']]) && $meeting['members'][$device['uuid']]['dis_connect'] = time();
+                            if(isset($meeting['members'][$device['uuid']])) $meeting['members'][$device['uuid']]=$device;
                         }
                         //更新meeting
                         //$redis->hset(OnlineMeeting,$meeting['meeting_id'],$meeting);
@@ -85,7 +86,6 @@ class connectController
                         }
 
                     }
-                    $device['dis_connect']=time();
                     $redis->hset(OnlineFDToDevice,$delFd,serialize($device));
                 }
             }
