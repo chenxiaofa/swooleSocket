@@ -182,8 +182,10 @@ class meetingController
 
                     $disFd = $redis->hget(OnlineDeviceToFd, $params['dis_uuid']);
                     $redis->hset(OnlineFDToDevice, $disFd, serialize($disMember));
+                    //删除用户信息
                     unset($meeting['members'][$params['dis_uuid']]);
                     $redis->hset(OnlineMeeting, $params['meeting_id'], serialize($meeting));
+
                     foreach ($meeting['members'] as $uuid => $info) {
                         Server::successSend($redis->hget(OnlineDeviceToFd, $uuid), $memberForMessage, FlushMeetingMembersQuit);
                     }
