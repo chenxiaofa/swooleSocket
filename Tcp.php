@@ -88,7 +88,7 @@ class Server
             ) use ($serv) {
                 echo "定时任务：".time()."\n";
                 $this->copyGlobal($serv, 0);
-                $serv->index->run('dirtyDataHandel/disconnectAndNotify', []);
+                //$serv->index->run('dirtyDataHandel/disconnectAndNotify', []);
             });
         }
 

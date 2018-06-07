@@ -7,9 +7,8 @@
  * Time: 下午3:32
  */
 
-const OnlineDeviceToFd = 'zhy_online_device_to_fd';
-const OnlineFDToDevice = 'zhy_online_fd_to_device';
-const OnlineMeeting = 'zhy_meeting';
+const OnlineDeviceToFd = 'screen_online_device_to_fd';
+const OnlineFDToDevice = 'screen_online_fd_to_device';
 
 
 /**
