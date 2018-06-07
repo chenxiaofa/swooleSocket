@@ -41,10 +41,9 @@ class indexController
         $redis->exec();
 
 
-
         //分发用户信息
         Client::send(['path'=>'online/success','params'=>$params]);
-        //Server::successSend($GLOBALS['fd'], []);
+        Server::successSend($GLOBALS['fd'], [],OnlineSuccess);
         $redisHandel->put($redis);
     }
 
@@ -65,6 +64,7 @@ class indexController
             $redis->hdel(OnlineFDToDevice, $params['fd']);
             //分发用户详细信息
             Client::send(['path'=>'offline/success','params'=>$device]);
+            Server::successSend($params['fd'], [],OfflineSuccess);
         }
         $redisHandel->put($redis);
 

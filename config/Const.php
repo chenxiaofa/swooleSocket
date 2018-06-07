@@ -18,4 +18,8 @@ const SuccessMessage = 1001;//success
 const FatalError = -1001;//server error
 const ParamsRequiredError = -1002;//params is required
 
-const BindSuccess = 2001;
+
+const OnlineSuccess = 2001;
+const OfflineSuccess = 3001;
+const BindSuccess = 4001;
+const DisBindSuccess = 5001;
