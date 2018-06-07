@@ -27,7 +27,8 @@ class dirtydatahandelController
             $device = $redis->hget(OnlineFDToDevice,$fd);
             $device = $device?unserialize($device):[];
             if($device){
-                (new dirtydatahandelController())->offlineAction(['uuid'=>$device['uuid']]);
+                (new indexController())->offlineAction(['fd'=>$fd]);
+                //(new dirtydatahandelController())->offlineAction(['uuid'=>$device['uuid']]);
             }
         }
         $redisHandel->put($redis);
