@@ -27,7 +27,7 @@ class Server
 
     public function __construct()
     {
-        $this->server = new swoole_server('0.0.0.0', 9901);
+        $this->server = new swoole_server('0.0.0.0', 9902);
         $this->server->set($this->config);
 
         $this->server->on('Connect', array($this, "OnConnect"));
