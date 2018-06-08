@@ -21,7 +21,6 @@ class indexController
 
     public function onlineAction($params)
     {
-        var_dump(array_diff(['screen_uuid', "ip_addr", 'username'], array_keys($params)));
         if (count(array_diff(['screen_uuid', "ip_addr", 'username'], array_keys($params))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
             return;
