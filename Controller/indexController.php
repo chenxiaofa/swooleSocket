@@ -42,7 +42,7 @@ class indexController
 
 
         //分发用户信息
-        Client::send(['path'=>'online/success','params'=>$params]);
+        Client::send(['path'=>'transmit/broadcast','params'=>['data'=>$params,'code'=>OnlineSuccessForManager]]);
         Server::successSend($GLOBALS['fd'], [],OnlineSuccess);
         $redisHandel->put($redis);
     }
@@ -63,8 +63,8 @@ class indexController
             $redis->hdel(OnlineDeviceToFd, $device['uuid']);
             $redis->hdel(OnlineFDToDevice, $params['fd']);
             //分发用户详细信息
-            Client::send(['path'=>'offline/success','params'=>$device]);
-            Server::successSend($params['fd'], [],OfflineSuccess);
+            Client::send(['path'=>'transmit/broadcast','params'=>['data'=>$params,'code'=>OfflineSuccessForManager]]);
+            //Server::successSend($params['fd'], [],OfflineSuccess);
         }
         $redisHandel->put($redis);
 
@@ -85,25 +85,26 @@ class indexController
         if ($device && $device['uuid'] == $params['uuid']) {
             if (!$device['manager_uuid']) {//不存在绑定关系，可以绑定
                 $device['manager_uuid'] = $params['manager_uuid'];
+                $device['manager_info'] = $params['manager_info'];
                 $device['status'] = time();
                 $redis->hset(OnlineFDToDevice, $deviceFd, serialize($device));
                 //发送给大屏通知，绑定成功
-                //Server::successSend($deviceFd,[],BindSuccess);
+                Server::successSend($deviceFd,$params,BindSuccess);
 
                 //发送给managers，绑定成功，且发送绑定的大屏信息
-                Client::send(['path'=>'bind/success','params'=>$device]);
+                Client::send(['path'=>'transmit/broadcast','params'=>['data'=>$device,'code'=>BindSuccessForManager]]);
                 $redisHandel->put($redis);
                 return;
             } else {
                 //发送给manager通知，绑定失败，该大屏已经绑定了设备
-                Client::send(['path'=>'bind/fail','params'=>['manager_uuid'=>$params['manager_uuid'],'code'=>'repeat']]);
+                Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['manager_uuid'],'data'=>[],'code'=>BindFailRepeatForManager]]);
                 $redisHandel->put($redis);
                 return;
             }
         }
 
         //发送给manager通知，绑定失败，不存在这个大屏设备
-        Client::send(['path'=>'bind/fail','params'=>['manager_uuid'=>$params['manager_uuid'],'code'=>'miss']]);
+        Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['manager_uuid'],'data'=>[],'code'=>BindFailMisForManager]]);
 
         $redisHandel->put($redis);
     }
@@ -126,44 +127,25 @@ class indexController
                 $device['status'] = 0;
                 $redis->hset(OnlineFDToDevice, $deviceFd, serialize($device));
                 //发送给大屏通知，解除绑定成功
-
+                Server::successSend($deviceFd,$params,DisBindSuccess);
 
                 //发送给managers，解除绑定成功，且发送绑定的用户信息
-                Client::send(['path'=>'disbind/success','params'=>$device]);
+                Client::send(['path'=>'transmit/broadcast','params'=>['code'=>DisBindSuccessForManager,'data'=>$device]]);
                 $redisHandel->put($redis);
                 return;
             } else {
                 //发送给manager通知，解除绑定失败，该大屏绑定的不是这台设备
-                Client::send(['path'=>'disbind/fail','params'=>['manager_uuid'=>$params['uuid'],'code'=>'mismatch']]);
+                Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['uuid'],'code'=>DisBindFailMismatchForManager,'data'=>[],]]);
                 $redisHandel->put($redis);
                 return;
             }
         }
 
         //发送给manager通知，绑定失败，不存在这个大屏设备
-        Client::send(['path'=>'disbind/fail','params'=>['manager_uuid'=>$params['uuid'],'code'=>'miss']]);
+        Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['uuid'],'code'=>DisBindFailMissForManager,'data'=>[]]]);
 
         $redisHandel->put($redis);
     }
-
-//    public function offlineAction($params){
-//        if (count(array_diff(['uuid'],array_keys($params)))>0){
-//            Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError); return;
-//        }
-//        $redisHandel = Redis::getInstance();
-//        $redis = $redisHandel->get();
-//        $deviceFd = $redis->hget(OnlineDeviceToFd,$params['uuid']);
-//        $device = $redis->hget(OnlineFDToDevice,$deviceFd);
-//        $device = $device?unserialize($device):[];
-//        if ($device && $device['uuid'] == $params['uuid']){
-//            $redis->hdel(OnlineFDToDevice,$deviceFd);
-//            $redis->hdel(OnlineDeviceToFd,$params['uuid']);
-//
-//            //发送用户退出的详细信息
-//        }
-//
-//    }
-//
 
 
 }

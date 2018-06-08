@@ -23,3 +23,12 @@ const OnlineSuccess = 2001;
 const OfflineSuccess = 3001;
 const BindSuccess = 4001;
 const DisBindSuccess = 5001;
+
+const OnlineSuccessForManager=201;
+const OfflineSuccessForManager=301;
+const BindSuccessForManager = 401;
+const BindFailRepeatForManager = -401;
+const BindFailMisForManager = -402;
+const DisBindSuccessForManager = 501;
+const DisBindFailMismatchForManager = -501;
+const DisBindFailMissForManager = -502;
