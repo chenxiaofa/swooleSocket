@@ -60,7 +60,7 @@ class meetingController
 
 
         $redisHandel->put($redis);
-        Server::successSend($GLOBALS['fd'], ['meeting_id'=>$meeting_id], MeetingCreateSuccess);
+        Server::successSend($GLOBALS['fd'], $meeting, MeetingCreateSuccess);
     }
 
 

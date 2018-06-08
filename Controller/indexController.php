@@ -32,12 +32,13 @@ class indexController
         $redis = $redisHandel->get();
 
         $oldDeviceFd = $redis->hget(OnlineDeviceToFd,$params['uuid']);
-
+        var_dump($oldDeviceFd);
         $redis->multi();
         if($oldDeviceFd){//如果存在旧设备，则删除旧的fd基础信息
             //如果存在olddevice，則需要先退出會議
             $oldDevice = $redis->hget(OnlineFDToDevice,$oldDeviceFd);
             $oldDevice = $oldDevice?unserialize($oldDevice):[];
+
             if (@$oldDevice['meeting_id']){
                 $meeting = $redis->hget(OnlineMeeting,$oldDevice['meeting_id']);
                 $meeting && $meeting = unserialize($meeting);
