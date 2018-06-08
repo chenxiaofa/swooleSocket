@@ -48,7 +48,15 @@ class connectController
             //重连要更新一下通知
             //Server::successSend($GLOBALS['fd'],$meeting,FlushMeetingMembersSuccess);
         } else {//重连信息不存在，返回失败
-            Server::failedSend($GLOBALS['fd'], [], ReconnectFailed);
+
+            $params['created_at'] = time();
+            $params['meeting_id'] = null;
+            $params['username'] = null;
+            $params['dis_connect'] = 0;
+            $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($params));
+            $redis->hset(OnlineDeviceToFd,$params['uuid'],$GLOBALS['fd']);
+            Server::successSend($GLOBALS['fd'], [], ReconnectSuccess);
+            //Server::failedSend($GLOBALS['fd'], [], ReconnectFailed);
         }
         $redisHandel->put($redis);
     }
