@@ -14,7 +14,7 @@ class Client
     public function __construct()
     {
         $this->client = new Swoole\Coroutine\Client(SWOOLE_SOCK_TCP);
-        if (!$this->client->connect('127.0.0.1', 9501, 0.5))
+        if (!$this->client->connect('127.0.0.1', 9902, 0.5))
         {
             echo "connect failed. Error: {$this->client->errCode}\n";
         }

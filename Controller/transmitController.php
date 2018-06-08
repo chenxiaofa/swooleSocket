@@ -39,7 +39,8 @@ class transmitController
 
 
     public function requestAction($params){
-        if (count(array_diff(['uuid', 'manager_uuid'], array_keys($params))) > 0) {
+        var_dump($params);
+        if (count(array_diff(['screen_uuid', 'manager_uuid'], array_keys($params['params']))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
         Client::send($params);
