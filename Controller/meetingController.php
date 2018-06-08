@@ -51,7 +51,7 @@ class meetingController
             'manager' => $params['uuid'],
             'manager_info'=> $managerInfo,
             'monitor'=>$params['monitor'],
-            'create_at'=>time(),
+            'created_at'=>time(),
             'members' => []
         ];
 
