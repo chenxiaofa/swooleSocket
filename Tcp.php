@@ -49,7 +49,7 @@ class Server
     {
 
         $this->copyGlobal($serv, $fd);
-        $serv->index->run('connect/disconnect', ['fd' => $fd]);
+        $serv->index->run('index/offline', ['fd' => $fd]);
         echo "has disConnected fd = $fd,\n";
     }
 
@@ -88,7 +88,7 @@ class Server
             ) use ($serv) {
                 echo "定时任务：".time()."\n";
                 $this->copyGlobal($serv, 0);
-                //$serv->index->run('dirtyDataHandel/disconnectAndNotify', []);
+                $serv->index->run('dirtyDataHandel/disconnectAndNotify', []);
             });
         }
 
