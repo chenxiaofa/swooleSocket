@@ -33,7 +33,6 @@ class indexController
 
         $oldDeviceFd = $redis->hget(OnlineDeviceToFd,$params['uuid']);
         var_dump($oldDeviceFd); echo "<====oldDeviceFd:\n";
-        $redis->multi();
         if($oldDeviceFd){//如果存在旧设备，则删除旧的fd基础信息
             //如果存在olddevice，則需要先退出會議
             $oldDevice = $redis->hget(OnlineFDToDevice,$oldDeviceFd);
@@ -56,7 +55,6 @@ class indexController
         }
         $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($params));
         $redis->hset(OnlineDeviceToFd,$params['uuid'],$GLOBALS['fd']);
-        $redis->exec();
 
         $redisHandel->put($redis);
 
