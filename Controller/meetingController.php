@@ -92,7 +92,8 @@ class meetingController
 
         if ($meeting) {//会议记录是否存在
             $member = $redis->hget(OnlineFDToDevice, $GLOBALS['fd']);
-            $member = unserialize($member);
+            $member = $member?unserialize($member):[];
+            echo "join meeting member: \n";var_dump($member);
             //检测成员信息是否还存在其他会议中，
             if ($member['meeting_id']){
                 $oldMeeting = $redis->hget(OnlineMeeting,$member['meeting_id']);
