@@ -42,6 +42,7 @@ class dirtydatahandelController
 
     public function disconnectandnotifyAction()
     {
+
         $connList = Server::getConnections();
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
