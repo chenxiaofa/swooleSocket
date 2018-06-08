@@ -34,3 +34,13 @@ const FlushMeetingMembersReConnect = 4005;//刷新用户列表
 const JoinMeetingSuccess=5001;
 const ReconnectSuccess=6001;
 const ReconnectFailed=-6001;
+
+//screen
+const ScreenOnline=7001;
+const ScreenOffline=7002;
+const ScreenBindSuccess = 8001;
+const ScreenBindRepeatFail = -8002;
+const ScreenBindMissFail = -8003;
+const ScreenDisBindSuccess = 9001;
+const ScreenDisBindMiss = -9002;
+const ScreenDisBindMissMatch = -9003;
