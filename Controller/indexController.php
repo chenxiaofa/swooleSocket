@@ -75,6 +75,8 @@ class indexController
     {
         if (count(array_diff(['screen_uuid', "manager_uuid",'manager_info'], array_keys($params))) > 0) {
             //发送给manager通知，
+            Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['manager_uuid'],'data'=>[],'code'=>ParamsRequiredError]]);
+            return;
             //  Server::failedSend($GLOBALS['fd'],[],ParamsRequiredError); return;
         }
         $redisHandel = Redis::getInstance();
@@ -83,6 +85,7 @@ class indexController
         $device = $redis->hget(OnlineFDToDevice, $deviceFd);
         $device = $device ? unserialize($device) : false;
         if ($device && $device['screen_uuid'] == $params['screen_uuid']) {
+            var_dump($device);
             if (!$device['manager_uuid']) {//不存在绑定关系，可以绑定
                 $device['manager_uuid'] = $params['manager_uuid'];
                 $device['manager_info'] = $params['manager_info'];

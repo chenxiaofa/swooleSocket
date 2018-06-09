@@ -14,21 +14,21 @@ const OnlineFDToDevice = 'screen_online_fd_to_device';
 /**
  * 错误码响应messsage
  */
-const SuccessMessage = 1001;//success
-const FatalError = -1001;//server error
-const ParamsRequiredError = -1002;//params is required
+const SuccessMessage = 101;//success
+const FatalError = -101;//server error
+const ParamsRequiredError = -102;//params is required
 
 
-const OnlineSuccess = 2001;
-const OfflineSuccess = 3001;
-const BindSuccess = 4001;
-const DisBindSuccess = 5001;
+const OnlineSuccess = 201;
+const OfflineSuccess = 301;
+const BindSuccess = 401;
+const DisBindSuccess = 501;
 
-const OnlineSuccessForManager=201;
-const OfflineSuccessForManager=301;
-const BindSuccessForManager = 401;
-const BindFailRepeatForManager = -401;
-const BindFailMisForManager = -402;
-const DisBindSuccessForManager = 501;
-const DisBindFailMismatchForManager = -501;
-const DisBindFailMissForManager = -502;
+const OnlineSuccessForManager=601;
+const OfflineSuccessForManager=701;
+const BindSuccessForManager = 801;
+const BindFailRepeatForManager = -801;
+const BindFailMisForManager = -802;
+const DisBindSuccessForManager = 901;
+const DisBindFailMismatchForManager = -901;
+const DisBindFailMissForManager = -902;

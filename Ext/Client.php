@@ -13,6 +13,7 @@ class Client
 {
     public static function send(array $data){
         $clientHandel = \core\Client::getInstance();
+        echo "sned Data:".json_encode($data)."\n";
         return $clientHandel->send(json_encode($data));
     }
 }
