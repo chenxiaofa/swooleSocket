@@ -10,7 +10,7 @@ namespace Ext;
 class Server
 {
     public static function send($data,$fd=0){
-        echo "send Data:{$data} \n";
+        echo "send fd=>Data:{$fd}=>{$data} \n";
         echo "debug :";
         print_r(debug_backtrace(2));
         echo "\n";
