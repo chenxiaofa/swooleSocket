@@ -124,7 +124,7 @@ class indexController
         $device = $redis->hget(OnlineFDToDevice, $deviceFd);
         $device = $device ? unserialize($device) : false;
         if ($device && $device['screen_uuid'] == $params['screen_uuid']) {
-            if ($device['manager_uuid'] != $params['manager_uuid']) {//不存在绑定关系，不能解绑
+            if ($device['manager_uuid'] == $params['manager_uuid']) {//不存在绑定关系，不能解绑
                 $device['manager_uuid'] = null;
                 $device['status'] = 0;
                 $redis->hset(OnlineFDToDevice, $deviceFd, serialize($device));
