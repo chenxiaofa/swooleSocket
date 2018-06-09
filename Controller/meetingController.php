@@ -50,6 +50,7 @@ class meetingController
             'name' => $params['name'],
             'manager' => $params['uuid'],
             'manager_info'=> $managerInfo,
+            'screen_list'=>$redis->hgetall('screen_online_fd_to_device'),
             'monitor'=>$params['monitor'],
             'created_at'=>time(),
             'members' => []
@@ -216,6 +217,11 @@ class meetingController
         if (count(array_diff(['meeting_id', 'uuid'], array_keys($params))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);return;
         }
+        //notify screen disconnect to disbind
+        /**
+         * To Do
+         */
+
 
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
