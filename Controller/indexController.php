@@ -124,7 +124,7 @@ class indexController
         $device = $redis->hget(OnlineFDToDevice, $deviceFd);
         $device = $device ? unserialize($device) : false;
         if ($device && $device['screen_uuid'] == $params['screen_uuid']) {
-            if ($device['manager_uuid'] !== $params['manager_uuid']) {//不存在绑定关系，不能解绑
+            if ($device['manager_uuid'] != $params['manager_uuid']) {//不存在绑定关系，不能解绑
                 $device['manager_uuid'] = null;
                 $device['status'] = 0;
                 $redis->hset(OnlineFDToDevice, $deviceFd, serialize($device));
@@ -137,14 +137,14 @@ class indexController
                 return;
             } else {
                 //发送给manager通知，解除绑定失败，该大屏绑定的不是这台设备
-                Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['screen_uuid'],'code'=>DisBindFailMismatchForManager,'data'=>[],]]);
+                Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['manager_uuid'],'code'=>DisBindFailMismatchForManager,'data'=>[],]]);
                 $redisHandel->put($redis);
                 return;
             }
         }
 
         //发送给manager通知，绑定失败，不存在这个大屏设备
-        Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['screen_uuid'],'code'=>DisBindFailMissForManager,'data'=>[]]]);
+        Client::send(['path'=>'transmit/signal','params'=>['manager_uuid'=>$params['manager_uuid'],'code'=>DisBindFailMissForManager,'data'=>[]]]);
 
         $redisHandel->put($redis);
     }
