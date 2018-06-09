@@ -85,7 +85,6 @@ class indexController
         $device = $redis->hget(OnlineFDToDevice, $deviceFd);
         $device = $device ? unserialize($device) : false;
         if ($device && $device['screen_uuid'] == $params['screen_uuid']) {
-            var_dump($device);
             if (!$device['manager_uuid']) {//不存在绑定关系，可以绑定
                 $device['manager_uuid'] = $params['manager_uuid'];
                 $device['manager_info'] = $params['manager_info'];
@@ -122,7 +121,7 @@ class indexController
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         $deviceFd = $redis->hget(OnlineDeviceToFd, $params['screen_uuid']);
-        $device = $this->hget(OnlineFDToDevice, $deviceFd);
+        $device = $redis->hget(OnlineFDToDevice, $deviceFd);
         $device = $device ? unserialize($device) : false;
         if ($device && $device['screen_uuid'] == $params['screen_uuid']) {
             if ($device['manager_uuid'] !== $params['manager_uuid']) {//不存在绑定关系，不能解绑
