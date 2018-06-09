@@ -40,7 +40,6 @@ class indexController
         $redis->hset(OnlineDeviceToFd, $params['screen_uuid'], $GLOBALS['fd']);
         $redis->exec();
 
-
         //分发用户信息
         Client::send(['path'=>'transmit/broadcast','params'=>['data'=>$params,'code'=>OnlineSuccessForManager]]);
         Server::successSend($GLOBALS['fd'], [],OnlineSuccess);

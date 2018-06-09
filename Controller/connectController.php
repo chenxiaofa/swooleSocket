@@ -15,7 +15,11 @@ use Ext\Server;
 class connectController
 {
         
-     
+     public function reconnect(){
+         /**
+          * TODO
+          */
+     }
 
 
 }

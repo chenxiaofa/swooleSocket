@@ -20,7 +20,6 @@ const ParamsRequiredError = -102;//params is required
 
 
 const OnlineSuccess = 201;
-const OfflineSuccess = 301;
 const BindSuccess = 401;
 const DisBindSuccess = 501;
 
