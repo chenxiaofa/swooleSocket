@@ -247,13 +247,13 @@ class meetingController
         $redisHandel->put($redis);
     }
 
-
     private function getScreenList(){
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         $list = $redis->hgetall('screen_online_fd_to_device');
         foreach ($list as $fd=>$screen){
-            $list[$screen['screen_uuid']] = unserialize($screen);
+            $screen = unserialize($screen);
+            $list[$screen['screen_uuid']] = $screen;
         }
         $redisHandel->put($redis);
         return $list;
