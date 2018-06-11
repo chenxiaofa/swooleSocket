@@ -29,7 +29,7 @@ class dirtydatahandelController
         }
         //单独删除device-》fd的redis列表
         $deviceFd = $redis->hgetall(OnlineDeviceToFd);
-        $deviceFd = array_flip($deviceFd);
+        $deviceFd = array_flip(array_filter($deviceFd,function ($val){if(!is_numeric($val))  return true;return false;}));
         $fds = count($deviceFd) > 0 ? array_keys($deviceFd) : [];
         $delDeviceFd = array_diff($fds, $connList);
         foreach ($delDeviceFd as $value) {
@@ -47,6 +47,7 @@ class dirtydatahandelController
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         //单独删除fd-》device的redis列表
+        var_dump($redis->hgetall(OnlineDeviceToFd));
         $fdDevices = $redis->hkeys(OnlineFDToDevice);
         $fdDevices = $fdDevices ?: [];
         $delFdDevices = array_diff($fdDevices, $connList);

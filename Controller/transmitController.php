@@ -30,8 +30,10 @@ class transmitController
 
         $meetings = $redis->hgetall(OnlineMeeting);
         foreach ($meetings as $meeting){
-            $meeting = unserialize($meeting);
-            Server::successSend($redis->hget(OnlineDeviceToFd,$meeting['manager']),$params['data'],$params['code']);
+            if (!is_numeric($meeting)){
+                $meeting = unserialize($meeting);
+                Server::successSend($redis->hget(OnlineDeviceToFd,$meeting['manager']),$params['data'],$params['code']);
+            }
         }
 
         $redisHandel->put($redis);
