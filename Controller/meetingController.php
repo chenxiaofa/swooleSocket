@@ -50,7 +50,7 @@ class meetingController
             'name' => $params['name'],
             'manager' => $params['uuid'],
             'manager_info'=> $managerInfo,
-            'screen_list'=>$redis->hgetall('screen_online_fd_to_device'),
+            //'screen_list'=>$redis->hgetall('screen_online_fd_to_device'),
             'monitor'=>$params['monitor'],
             'created_at'=>time(),
             'members' => []
@@ -61,7 +61,7 @@ class meetingController
 
 
         $redisHandel->put($redis);
-        Server::successSend($GLOBALS['fd'], $meeting, MeetingCreateSuccess);
+        Server::successSend($GLOBALS['fd'], array_merge($meeting,['screen_list'=>$this->getScreenList()]), MeetingCreateSuccess);
     }
 
 
@@ -243,6 +243,15 @@ class meetingController
         }
 
         $redis->del(OnlineMeeting, $params['meeting_id']);
+
+        $redisHandel->put($redis);
+    }
+
+
+    private function getScreenList(){
+        $redisHandel = Redis::getInstance();
+        $redis = $redisHandel->get();
+        return $redis->hgetall('screen_online_fd_to_device');
 
         $redisHandel->put($redis);
     }
