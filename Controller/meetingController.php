@@ -252,9 +252,11 @@ class meetingController
         $redis = $redisHandel->get();
         $list = $redis->hgetall('screen_online_fd_to_device');
         $result = [];
-        foreach ($list as $fd=>$screen){
-            $screen = unserialize($screen);
-            $result[$screen['screen_uuid']] = $screen;
+        foreach ($list as $screen){
+            if (!is_numeric($screen)){
+                $screen = unserialize($screen);
+                $result[$screen['screen_uuid']] = $screen;
+            }
         }
         $redisHandel->put($redis);
         return $result;
