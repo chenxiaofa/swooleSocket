@@ -62,7 +62,7 @@ class indexController
             $redis->hdel(OnlineDeviceToFd, $device['screen_uuid']);
             $redis->hdel(OnlineFDToDevice, $params['fd']);
             //分发用户详细信息
-            Client::send(['path'=>'transmit/broadcast','params'=>['data'=>$params,'code'=>OfflineSuccessForManager]]);
+            Client::send(['path'=>'transmit/broadcast','params'=>['data'=>$device,'code'=>OfflineSuccessForManager]]);
             //Server::successSend($params['fd'], [],OfflineSuccess);
         }
         $redisHandel->put($redis);
