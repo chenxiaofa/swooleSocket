@@ -54,8 +54,6 @@ class dirtydatahandelController
         foreach ($delFdDevices as $fd) {
             $device = $redis->hget(OnlineFDToDevice, $fd);
             $device = $device ? unserialize($device) : [];
-
-
             $meeting = $redis->hget(OnlineMeeting, $device['meeting_id']);
             $meeting = $meeting ? unserialize($meeting) : null;
             //判断是否存在meeting，不存在旧直接删除了
