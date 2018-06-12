@@ -22,6 +22,8 @@ const ParamsRequiredError = -102;//params is required
 const OnlineSuccess = 201;
 const BindSuccess = 401;
 const DisBindSuccess = 501;
+const DisBindFailMiss = -501;
+const DisBindFailMisMatch = -502;
 
 const OnlineSuccessForManager=601;
 const OfflineSuccessForManager=701;
