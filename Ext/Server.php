@@ -10,7 +10,7 @@ namespace Ext;
 class Server
 {
     public static function send($data,$fd=0){
-        echo "send Data:{$data} \n";
+        echo "send Server Data:{$data} \n";
 
         if (self::fdExists($fd)){
             $GLOBALS['serv']->send($fd!==0?$fd:$GLOBALS['fd'],$data);

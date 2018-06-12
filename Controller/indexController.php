@@ -124,6 +124,7 @@ class indexController
         $device = $device ? unserialize($device) : false;
         if ($device && $device['screen_uuid'] == $params['screen_uuid']) {
             if ($device['manager_uuid'] == $params['manager_uuid']) {//不存在绑定关系，不能解绑
+                $deviceForMessage = $device;
                 $device['manager_uuid'] = null;
                 $device['status'] = 0;
                 $redis->hset(OnlineFDToDevice, $deviceFd, serialize($device));
@@ -131,7 +132,7 @@ class indexController
                 Server::successSend($deviceFd,$params,DisBindSuccess);
 
                 //发送给managers，解除绑定成功，且发送绑定的用户信息
-                Client::send(['path'=>'transmit/broadcast','params'=>['code'=>DisBindSuccessForManager,'data'=>$device]]);
+                Client::send(['path'=>'transmit/broadcast','params'=>['code'=>DisBindSuccessForManager,'data'=>$deviceForMessage]]);
                 $redisHandel->put($redis);
                 return;
             } else {
