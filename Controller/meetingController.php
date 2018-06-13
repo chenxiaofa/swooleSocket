@@ -222,7 +222,6 @@ class meetingController
          * To Do
          */
 
-
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         $meeting = $redis->hget(OnlineMeeting, $params['meeting_id']);
@@ -240,9 +239,13 @@ class meetingController
             $managerInfo['meeting_id'] = null;
             $redis->hset(OnlineFDToDevice, $managerFd, serialize($managerInfo));
             Server::successSend($redis->hget(OnlineDeviceToFd, $meeting['manager']), [], DissolveMeetingSuccess);
-        }
 
-        $redis->del(OnlineMeeting, $params['meeting_id']);
+            echo "delete meeting-------------------------------------------";
+            print_r(debug_backtrace(2));
+            print_r($params);
+            echo "delete meeting--------------------------------------------";
+            $redis->del(OnlineMeeting, $params['meeting_id']);
+        }
 
         $redisHandel->put($redis);
     }
