@@ -173,8 +173,8 @@ class indexController
 
         $screen['manager_uuid']=null;
         $screen['status']=0;
-        $redis->hset(OnlineFDToDevice, $list[$num], serialize($screen));
-        Server::successSend($list[$num],['manager_uuid'=>$params['manager_uuid'],'screen_uuid'=>$screen['screen_uuid']],DisBindSuccess);
+        $redis->hset(OnlineFDToDevice, $list[$num-1], serialize($screen));
+        Server::successSend($list[$num-1],['manager_uuid'=>$params['manager_uuid'],'screen_uuid'=>$screen['screen_uuid']],DisBindSuccess);
         Client::send(['path'=>'transmit/broadcast','params'=>['code'=>DisBindSuccessForManager,'data'=>$screen]]);
         $redisHandel->put($redis);
         return;
