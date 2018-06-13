@@ -17,7 +17,7 @@ class connectController
     //异常断开，重新链接，替换fd即可
     public function reconnectAction($params)
     {
-        if (count(array_diff(['uuid'], array_keys($params))) > 0) {
+        if (count(array_diff(['uuid','ip_addr'], array_keys($params))) > 0) {
             Server::failedSend($GLOBALS['fd'], [], ParamsRequiredError);
             return;
         }
@@ -39,7 +39,7 @@ class connectController
                 $redis->hset(OnlineMeeting, $deviceInfo['meeting_id'], serialize($meeting));
                 foreach (array_merge($meeting['members'], [$meeting['manager_info']]) as $member) {
                     if ($member['uuid'] == $deviceInfo['uuid']) {
-                        Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $meeting, ReconnectSuccess);
+                        Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $deviceInfo, ReconnectSuccess);
                     } else {
                         Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $deviceInfo, FlushMeetingMembersReConnect);
                     }
@@ -55,7 +55,7 @@ class connectController
             $params['dis_connect'] = 0;
             $redis->hset(OnlineFDToDevice,$GLOBALS['fd'],serialize($params));
             $redis->hset(OnlineDeviceToFd,$params['uuid'],$GLOBALS['fd']);
-            Server::successSend($GLOBALS['fd'], [], ReconnectSuccess);
+            Server::successSend($GLOBALS['fd'], $params, ReconnectSuccess);
             //Server::failedSend($GLOBALS['fd'], [], ReconnectFailed);
         }
         $redisHandel->put($redis);
