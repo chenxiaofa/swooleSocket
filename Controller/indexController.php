@@ -149,6 +149,37 @@ class indexController
         $redisHandel->put($redis);
     }
 
+    public function breakAction($params){
+        $redisHandel = Redis::getInstance();
+        $redis = $redisHandel->get();
+        $list = $redis->hget(OnlineFDToDevice);
+        $fd=0;
+        foreach ($list as $screen){
+            if (!is_numeric($screen)){
+                $screen = unserialize($screen);
+                if (@$screen['manager_uuid'] == $params['manager_uuid']){
+                    break;
+                }
+            }
+            $fd +=1;
+        }
+        if ($fd!==0 || count($list) === $fd){
+            //取消投屏幕失败，没有匹配的屏幕
+            //Server::failedSend($fd,[],DisBindFailMiss);
+            echo "找不到设备，或者设备不匹配！\n";
+            $redisHandel->put($redis);
+            return ;
+        }
+
+        $screen['manager_uuid']=null;
+        $screen['status']=0;
+        $redis->hset(OnlineFDToDevice, $fd, serialize($screen));
+        Server::successSend($fd,['manager_uuid'=>$params['manager_uuid'],'screen_uuid'=>$screen['screen_uuid']],DisBindSuccess);
+        Client::send(['path'=>'transmit/broadcast','params'=>['code'=>DisBindSuccessForManager,'data'=>$screen]]);
+        $redisHandel->put($redis);
+        return;
+    }
+
 
 
     public function cancelAction($params){
