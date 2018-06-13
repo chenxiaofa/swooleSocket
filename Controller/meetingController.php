@@ -225,6 +225,7 @@ class meetingController
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
         $meeting = $redis->hget(OnlineMeeting, $params['meeting_id']);
+
         if ($meeting) {
             $meeting = unserialize($meeting);
             foreach ($meeting['members'] as $uuid => $info) {
@@ -244,7 +245,7 @@ class meetingController
             print_r(debug_backtrace(2));
             print_r($params);
             echo "delete meeting--------------------------------------------";
-            $redis->del(OnlineMeeting, $params['meeting_id']);
+            $redis->hdel(OnlineMeeting, $params['meeting_id']);
         }
 
         $redisHandel->put($redis);
