@@ -152,8 +152,8 @@ class indexController
     public function breakAction($params){
         $redisHandel = Redis::getInstance();
         $redis = $redisHandel->get();
-        $list = $redis->hget(OnlineFDToDevice);
-        $fd=0;
+        $list = $redis->hgetall(OnlineFDToDevice);
+        $num=0;
         foreach ($list as $screen){
             if (!is_numeric($screen)){
                 $screen = unserialize($screen);
@@ -161,9 +161,9 @@ class indexController
                     break;
                 }
             }
-            $fd +=1;
+            $num +=1;
         }
-        if ($fd!==0 || count($list) === $fd){
+        if ($num!==0 || count($list) === $num){
             //取消投屏幕失败，没有匹配的屏幕
             //Server::failedSend($fd,[],DisBindFailMiss);
             echo "找不到设备，或者设备不匹配！\n";
@@ -173,8 +173,8 @@ class indexController
 
         $screen['manager_uuid']=null;
         $screen['status']=0;
-        $redis->hset(OnlineFDToDevice, $fd, serialize($screen));
-        Server::successSend($fd,['manager_uuid'=>$params['manager_uuid'],'screen_uuid'=>$screen['screen_uuid']],DisBindSuccess);
+        $redis->hset(OnlineFDToDevice, $list[$num], serialize($screen));
+        Server::successSend($list[$num],['manager_uuid'=>$params['manager_uuid'],'screen_uuid'=>$screen['screen_uuid']],DisBindSuccess);
         Client::send(['path'=>'transmit/broadcast','params'=>['code'=>DisBindSuccessForManager,'data'=>$screen]]);
         $redisHandel->put($redis);
         return;
