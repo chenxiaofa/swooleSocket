@@ -33,13 +33,17 @@ class connectController
             $redis->hset(OnlineFDToDevice, $GLOBALS['fd'], serialize($deviceInfo));
             $meeting = $redis->hget(OnlineMeeting, $deviceInfo['meeting_id']);
             $meeting = $meeting ? unserialize($meeting) : [];
-            if ($meeting && isset($meeting['members'][$deviceInfo['uuid']])) {
+            if ($meeting && (isset($meeting['members'][$deviceInfo['uuid']])||$meeting['manager']==$deviceInfo['uuid'])) {
                 //重连成功，通知
-                $meeting['members'][$deviceInfo['uuid']] = $deviceInfo;
+                if ($meeting['manager']==$deviceInfo['uuid']){
+                    $meeting['manager_info'] = $deviceInfo;
+                }else{
+                    $meeting['members'][$deviceInfo['uuid']] = $deviceInfo;
+                }
                 $redis->hset(OnlineMeeting, $deviceInfo['meeting_id'], serialize($meeting));
                 foreach (array_merge($meeting['members'], [$meeting['manager_info']]) as $member) {
                     if ($member['uuid'] == $deviceInfo['uuid']) {
-                        Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $deviceInfo, ReconnectSuccess);
+                        Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $meeting, ReconnectSuccess);
                     } else {
                         Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $deviceInfo, FlushMeetingMembersReConnect);
                     }
