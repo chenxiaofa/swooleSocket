@@ -163,10 +163,10 @@ class indexController
             }
             $num +=1;
         }
-        if ($num!==0 || count($list) === $num){
+        if ($num===0 || count($list) === $num){
             //取消投屏幕失败，没有匹配的屏幕
             //Server::failedSend($fd,[],DisBindFailMiss);
-            echo "找不到设备，或者设备不匹配！\n";
+            echo "{$num}找不到设备，或者设备不匹配！\n";
             $redisHandel->put($redis);
             return ;
         }
