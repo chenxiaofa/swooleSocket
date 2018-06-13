@@ -48,6 +48,8 @@ class connectController
                         Server::successSend($redis->hget(OnlineDeviceToFd, $member['uuid']), $deviceInfo, FlushMeetingMembersReConnect);
                     }
                 }
+            }else{
+                Server::failedSend($GLOBALS['fd'],[],ReconnectFailed);
             }
             //重连要更新一下通知
             //Server::successSend($GLOBALS['fd'],$meeting,FlushMeetingMembersSuccess);

@@ -34,7 +34,7 @@ const FlushMeetingMembersReConnect = 4005;//刷新用户列表
 const JoinMeetingSuccess=5001;
 const ReconnectSuccess=6001;
 const ReconnectFailed=-6001;
-
+const ReconnectFailedNoMeeting=-6002;
 //screen
 const ScreenOnline=7001;
 const ScreenOffline=7002;
