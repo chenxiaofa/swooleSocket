@@ -10,6 +10,7 @@ namespace Controller;
 
 
 use core\Redis;
+use Ext\Client;
 use Ext\Server;
 
 class meetingController
@@ -246,6 +247,11 @@ class meetingController
             print_r($params);
             echo "delete meeting--------------------------------------------";
             $redis->hdel(OnlineMeeting, $params['meeting_id']);
+
+            //同时删除大屏
+            Client::send(['path'=>'index/break','params'=>['manager_uuid'=>$meeting['manager']]]);
+
+
         }
 
         $redisHandel->put($redis);
