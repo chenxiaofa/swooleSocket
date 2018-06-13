@@ -69,9 +69,11 @@ class dirtydatahandelController
 
                 if ($device['dis_connect'] !== 0 && $device['dis_connect'] < time() - 2 * 60) {//断线超过2min，直接删除掉
                     if ($meeting && $meeting['manager'] == $device['uuid']) {//解散会议
+                        echo "解散会议：";print_r($device);echo "\n";
                         (new meetingController())->dissolveAction(['uuid' => $device['uuid'], 'meeting_id' => $device['meeting_id']]);
                     }
                     if ($meeting && in_array($device['uuid'], array_keys($meeting['members']))) {//退出会议
+                        echo "退出会议：";print_r($device);echo "\n";
                         (new meetingController())->quitAction(['uuid' => $meeting['manager'], 'dis_uuid' => $device['uuid'], 'meeting_id' => $device['meeting_id'], 'is_disconnect' => true]);
                     }
                     //直接删除uuid=>fd
